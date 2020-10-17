@@ -26,4 +26,18 @@ public interface PersonDB {
      * @param personId The id of the person
      */
     void remove(String personId);
+
+    /**
+     * Checks if person is in the database
+     * @param personId The id of the person
+     * @return True if person in database, else false
+     */
+    boolean personInDb(String personId);
+
+    /**
+     * Returns person given its id
+     * @param personId The id of the person
+     * @return Person
+     */
+    Person get(String personId);
 }

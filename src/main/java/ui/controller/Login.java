@@ -14,7 +14,7 @@ public class Login extends RequestHandler {
 
         try {
             String userId = request.getParameter("userId").trim();
-            Person person = getService().get(userId);
+            Person person = service.get(userId);
 
             if (person != null && person.isCorrectPassword(request.getParameter("password").trim())) {
                 person.setLastLoginDateTime();

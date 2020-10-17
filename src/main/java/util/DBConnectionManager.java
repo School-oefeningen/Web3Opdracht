@@ -26,13 +26,7 @@ public class DBConnectionManager {
         try {
             System.out.print("connecting to database ...");
             Class.forName("org.postgresql.Driver");
-
-            System.out.println(dbURL);
-            System.out.println(dbProperties.get("user"));
-            System.out.println(dbProperties.get("password"));
-
             this.connection = DriverManager.getConnection(dbURL, dbProperties);
-
             System.out.println("done");
         } catch (ClassNotFoundException e) {
             System.out.println(e.getException().getMessage());

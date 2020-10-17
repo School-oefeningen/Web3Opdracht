@@ -23,7 +23,6 @@ public class Add extends RequestHandler {
 
         if (errors.size() == 0) {
             try {
-                System.out.println(person);
                 service.add(person);
                 return "Controller?command=Overview";
             } catch (DbException e) {

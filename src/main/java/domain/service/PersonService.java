@@ -5,14 +5,10 @@ import domain.db.PersonDB;
 import domain.db.PersonDBSQL;
 import domain.model.Person;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PersonService {
     private final PersonDB db = new PersonDBSQL();
-    private final Map<String, Person> people = new HashMap<>();
 
     public PersonService() {
     }
@@ -23,19 +19,14 @@ public class PersonService {
             throw new DbException("No id given");
         }
 
-        // Update people map
-        updatePeopleMap();
+        //Exception if person not in db
+        if (!db.personInDb(personId.toLowerCase())) throw new DbException("Person not in database");
 
-        //Exception if personId not in people map
-        Person person = people.get(personId.toLowerCase());
-        if (person == null) throw new DbException("Person not in database");
-
-        return person;
+        return db.get(personId);
     }
 
     public List<Person> getAll() {
-        updatePeopleMap();
-        return new ArrayList<Person>(people.values());
+        return db.getAll();
     }
 
     public void add(Person person) {
@@ -44,13 +35,8 @@ public class PersonService {
             throw new DbException("No person given");
         }
 
-        // Update the people map
-        updatePeopleMap();
-
-        // Exception if map contains person
-        if (people.containsKey(person.getUserid())) {
-            throw new DbException("User already exists");
-        }
+        //Exception if person in db
+        if (db.personInDb(person.getUserid().toLowerCase())) throw new DbException("Person already in database");
 
         // Add person
         db.add(person);
@@ -78,12 +64,5 @@ public class PersonService {
 
     public int getNumberOfPersons() {
         return db.getAll().size();
-    }
-
-    private void updatePeopleMap() {
-        people.clear();
-        for (Person p: db.getAll()) {
-            people.put(p.getUserid(), p);
-        }
     }
 }
