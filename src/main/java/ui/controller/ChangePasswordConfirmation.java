@@ -38,10 +38,12 @@ public class ChangePasswordConfirmation extends RequestHandler {
     }
 
     private void newPasswordAndConfirmationMatch(String newPassword, String newPasswordConfirmation) {
-        if (!newPassword.equals(newPasswordConfirmation)) throw new DomainException("New password and new password confirmation don't match");
+        if (!newPassword.equals(newPasswordConfirmation))
+            throw new DomainException("New password and new password confirmation don't match");
     }
 
     private void currentPasswordAndNewPasswordDontMatch(String currentPassword, String newPassword) {
-        if (currentPassword.equals(newPassword)) throw new DomainException("Current password and new password can't be the same");
+        if (currentPassword.equals(newPassword))
+            throw new DomainException("Current password and new password can't be the same");
     }
 }

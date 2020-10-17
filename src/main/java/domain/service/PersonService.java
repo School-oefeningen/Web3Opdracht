@@ -4,6 +4,7 @@ import domain.db.DbException;
 import domain.db.PersonDB;
 import domain.db.PersonDBSQL;
 import domain.model.Person;
+import util.Checker;
 
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class PersonService {
         }
 
         //Exception if person in db
-        if (db.personInDb(person.getUserid().toLowerCase())) throw new DbException("Person already in database");
+        if (db.personInDb(person.getUserid().toLowerCase())) throw new DbException("User already exists");
 
         // Add person
         db.add(person);
@@ -54,7 +55,7 @@ public class PersonService {
 
     public void delete(String personId) {
         // Exception if personId is null
-        if (personId == null || personId.trim().isEmpty()) {
+        if (Checker.isEmptyString(personId)) {
             throw new DbException("No id given");
         }
 

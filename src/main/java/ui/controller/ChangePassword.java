@@ -19,7 +19,7 @@ public class ChangePassword extends RequestHandler {
         Person p = (Person) request.getSession().getAttribute("user");
         Person person = service.get(p.getUserid());
 
-        person.setPassword(newPassword);
+        person.setPasswordHashed(newPassword);
         service.update(person);
 
         request.getSession().invalidate();

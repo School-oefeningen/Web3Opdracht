@@ -76,7 +76,7 @@ public class Add extends RequestHandler {
     private void setPersonPassword(Person person, HttpServletRequest request, List<String> errors) {
         String password = request.getParameter("password").trim();
         try {
-            person.setPassword(password);
+            person.setPasswordHashed(password);
             request.setAttribute("passwordPrevious", password);
         } catch (Exception e) {
             errors.add(e.getMessage());

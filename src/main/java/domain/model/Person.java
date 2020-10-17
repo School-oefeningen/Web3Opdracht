@@ -1,12 +1,18 @@
 package domain.model;
 
+import util.Checker;
+
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Person {
+    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy, HH:mm:ss");
     private String userid;
     private String email;
     private String password;
@@ -15,7 +21,6 @@ public class Person {
     private LocalDateTime registerDateTime = LocalDateTime.now();
     private LocalDateTime lastLoginDateTime = null;
     private int amountOfTimesLoggedIn = 0;
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy, HH:mm:ss");
 
     public Person() {
     }
@@ -31,28 +36,17 @@ public class Person {
         setAmountOfTimesLoggedIn(amountOfTimesLoggedIn);
     }
 
-    public void setRegisterDateTime(String registerDateTime) {
-        if (registerDateTime == null || registerDateTime.trim().isEmpty())
-            throw new DomainException("Register date time can't be null");
-        this.registerDateTime = formatStringToDateTime(registerDateTime);
-    }
-
-    public void setLastLoginDateTime(String lastLoginDateTime) {
-        if (lastLoginDateTime == null) this.lastLoginDateTime = null;
-        else formatStringToDateTime(lastLoginDateTime);
-    }
-
-    public void setAmountOfTimesLoggedIn(int amountOfTimesLoggedIn) {
-        if (amountOfTimesLoggedIn < 0) throw new DomainException("Amount of times logged in can't be negative");
-        this.amountOfTimesLoggedIn = amountOfTimesLoggedIn;
+    public void incrementAmountOfTimesLoggedIn() {
+        this.amountOfTimesLoggedIn++;
     }
 
     public int getAmountOfTimesLoggedIn() {
         return amountOfTimesLoggedIn;
     }
 
-    public void incrementAmountOfTimesLoggedIn() {
-        this.amountOfTimesLoggedIn++;
+    public void setAmountOfTimesLoggedIn(int amountOfTimesLoggedIn) {
+        if (amountOfTimesLoggedIn < 0) throw new DomainException("Amount of times logged in can't be negative");
+        this.amountOfTimesLoggedIn = amountOfTimesLoggedIn;
     }
 
     public LocalDateTime getRegisterDateTime() {
@@ -63,12 +57,23 @@ public class Person {
         return formatDateTimeToString(registerDateTime);
     }
 
+    public void setRegisterDateTime(String registerDateTime) {
+        if (Checker.isEmptyString(registerDateTime))
+            throw new DomainException("Register date time can't be null");
+        this.registerDateTime = formatStringToDateTime(registerDateTime);
+    }
+
     public LocalDateTime getLastLoginDateTime() {
         return lastLoginDateTime;
     }
 
     public String getlastLoginDateTimeToString() {
         return formatDateTimeToString(lastLoginDateTime);
+    }
+
+    public void setLastLoginDateTime(String lastLoginDateTime) {
+        if (lastLoginDateTime == null) this.lastLoginDateTime = null;
+        else formatStringToDateTime(lastLoginDateTime);
     }
 
     public void setLastLoginDateTime() {
@@ -86,9 +91,13 @@ public class Person {
         this.userid = userid.toLowerCase();
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public void setEmail(String email) {
         if (email.isEmpty()) {
-            throw new IllegalArgumentException("No email given");
+            throw new DomainException("No email given");
         }
         String USERID_PATTERN =
                 "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -96,31 +105,55 @@ public class Person {
         Pattern p = Pattern.compile(USERID_PATTERN);
         Matcher m = p.matcher(email);
         if (!m.matches()) {
-            throw new IllegalArgumentException("Email not valid");
+            throw new DomainException("Email not valid");
         }
         this.email = email;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public boolean isCorrectPassword(String password) {
-        if (password.isEmpty()) {
-            throw new IllegalArgumentException("No password given");
-        }
-        return getPassword().equals(password);
-    }
-
     public void setPassword(String password) {
-        if (password.isEmpty()) {
-            throw new IllegalArgumentException("No password given");
+        if (Checker.isEmptyString(password)) {
+            throw new DomainException("No password given");
         }
         this.password = password;
+    }
+
+    public void setPasswordHashed(String password) {
+        if (Checker.isEmptyString(password)) {
+            throw new DomainException("No password given");
+        }
+        this.password = hashPassword(password);
+    }
+
+    private String hashPassword(String password) {
+        try {
+            //create MessageDigest
+            MessageDigest crypt = MessageDigest.getInstance("SHA-512");
+            //reset
+            crypt.reset();
+            //update
+            byte[] passwordBytes = password.getBytes("UTF-8");
+            crypt.update(passwordBytes);
+            //digest
+            byte[] digest = crypt.digest();
+            //convert to String
+            BigInteger digestAsBigInteger = new BigInteger(1, digest);
+            //return hashed password
+            return digestAsBigInteger.toString(16);
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+            throw new DomainException(e.getMessage());
+        }
+    }
+
+    public boolean isCorrectPassword(String password) {
+        if (Checker.isEmptyString(password)) {
+            throw new DomainException("No password given");
+        }
+
+        return this.password.equals(hashPassword(password));
     }
 
     public String getFirstName() {
@@ -128,8 +161,8 @@ public class Person {
     }
 
     public void setFirstName(String firstName) {
-        if (firstName.isEmpty()) {
-            throw new IllegalArgumentException("No firstname given");
+        if (Checker.isEmptyString(firstName)) {
+            throw new DomainException("No firstname given");
         }
         this.firstName = firstName;
     }
@@ -139,7 +172,7 @@ public class Person {
     }
 
     public void setLastName(String lastName) {
-        if (lastName.isEmpty()) {
+        if (Checker.isEmptyString(lastName)) {
             throw new IllegalArgumentException("No last name given");
         }
         this.lastName = lastName;
@@ -155,8 +188,8 @@ public class Person {
         return ldt.format(FORMATTER);
     }
 
-    private LocalDateTime formatStringToDateTime(String s) {
-        if (s == null || s.trim().isEmpty()) throw new DomainException("Date time string can't be null");
-        return LocalDateTime.parse(s, FORMATTER);
+    private LocalDateTime formatStringToDateTime(String dateTimeString) {
+        if (Checker.isEmptyString(dateTimeString)) throw new DomainException("Date time string can't be null");
+        return LocalDateTime.parse(dateTimeString, FORMATTER);
     }
 }

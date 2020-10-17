@@ -128,10 +128,12 @@ nav ul li a {
     background-color: lightgray;
     transition: all .2s ease-in-out;
 }
+
 nav ul li:first-of-type a {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
+
 nav ul li:last-of-type a {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -183,10 +185,12 @@ footer {
     nav ul li a {
         padding: calc(var(--mobile-padding) * 2) calc(var(--mobile-padding) * 4);
     }
+
     nav ul li:first-of-type a {
         border-bottom-left-radius: 10px;
         border-top-right-radius: 0;
     }
+
     nav ul li:last-of-type a {
         border-top-right-radius: 10px;
         border-bottom-left-radius: 0;

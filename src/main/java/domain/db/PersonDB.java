@@ -8,6 +8,7 @@ public interface PersonDB {
 
     /**
      * Stores the given person in the database
+     *
      * @param person The person to be added
      * @throws DbException if the given person is null
      * @throws DbException if the given person can not be added
@@ -16,6 +17,7 @@ public interface PersonDB {
 
     /**
      * Returns a list with all people stored in the database
+     *
      * @return An arraylist with all people stored in the database
      * @throws DbException when there are problems with the connection to the database
      */
@@ -23,12 +25,14 @@ public interface PersonDB {
 
     /**
      * Removes a person from the database
+     *
      * @param personId The id of the person
      */
     void remove(String personId);
 
     /**
      * Checks if person is in the database
+     *
      * @param personId The id of the person
      * @return True if person in database, else false
      */
@@ -36,6 +40,7 @@ public interface PersonDB {
 
     /**
      * Returns person given its id
+     *
      * @param personId The id of the person
      * @return Person
      */

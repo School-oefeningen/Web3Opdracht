@@ -3,7 +3,10 @@ package domain.db;
 import domain.model.Person;
 import util.DbConnectionService;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +20,6 @@ public class PersonDBSQL implements PersonDB {
         System.out.println("Schema: " + schema);
     }
 
-    /**
-     * Stores the given person in the database
-     * @param person The person to be added
-     * @throws DbException if the given person is null
-     * @throws DbException if the given person can not be added
-     */
     @Override
     public void add(Person person) {
 
@@ -44,11 +41,6 @@ public class PersonDBSQL implements PersonDB {
         }
     }
 
-    /**
-     * Returns a list with all people stored in the database
-     * @return An arraylist with all people stored in the database
-     * @throws DbException when there are problems with the connection to the database
-     */
     @Override
     public List<Person> getAll() {
 
@@ -70,10 +62,6 @@ public class PersonDBSQL implements PersonDB {
         return people;
     }
 
-    /**
-     * Removes a person from the database
-     * @param personId The id of the person
-     */
     @Override
     public void remove(String personId) {
 
