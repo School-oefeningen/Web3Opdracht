@@ -10,7 +10,7 @@
     </error-page>
     <error-page>
         <error-code>404</error-code>
-        <location>/error404.jsp</location>
+        <location>/error.jsp</location>
     </error-page>
 
     <context-param>
