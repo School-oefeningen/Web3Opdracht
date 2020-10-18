@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class AppContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        String dbUrl = servletContextEvent.getServletContext().getInitParameter("dburl");
+        String dbUrl = servletContextEvent.getServletContext().getInitParameter("dbUrl");
         String schema = servletContextEvent.getServletContext().getInitParameter("schema");
         DbConnectionService.connect(dbUrl, schema);
     }

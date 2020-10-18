@@ -14,7 +14,7 @@
     </error-page>
 
     <context-param>
-        <param-name>dburl</param-name>
+        <param-name>dbUrl</param-name>
         <param-value>jdbc:postgresql://databanken.ucll.be:62021/webontwerp</param-value>
     </context-param>
     <context-param>

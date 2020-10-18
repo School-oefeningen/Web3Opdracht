@@ -23,14 +23,14 @@ public class DBConnectionManager {
         dbProperties.setProperty("sslmode", "require");
 
         try {
-            System.out.print("connecting to database ...");
-            Class.forName("org.postgresql.Driver");
-            this.connection = DriverManager.getConnection(dbURL, dbProperties);
+            System.out.println("connecting to database ...");
+            Class.forName("org.postgresql.Driver");this.connection = DriverManager.getConnection(dbURL, dbProperties);
             System.out.println("done");
         } catch (ClassNotFoundException e) {
             System.out.println(e.getException().getMessage());
         } catch (SQLException e) {
             System.out.println("connection troubles");
+            System.out.println(e.getMessage());
             System.out.println(e.getErrorCode());
         }
     }
