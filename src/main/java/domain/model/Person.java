@@ -8,16 +8,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Person {
     private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy, HH:mm:ss");
-    private String userid;
-    private String email;
-    private String password;
-    private String firstName;
-    private String lastName;
+    private String userid, email, password, firstName, lastName;
     private LocalDateTime registerDateTime = LocalDateTime.now();
     private LocalDateTime lastLoginDateTime = null;
     private int amountOfTimesLoggedIn = 0;
@@ -85,9 +79,7 @@ public class Person {
     }
 
     public void setUserid(String userid) {
-        if (userid.isEmpty()) {
-            throw new IllegalArgumentException("No user id given");
-        }
+        if (userid.isEmpty()) throw new DomainException("No user id given");
         this.userid = userid.toLowerCase();
     }
 
@@ -96,18 +88,7 @@ public class Person {
     }
 
     public void setEmail(String email) {
-        if (email.isEmpty()) {
-            throw new DomainException("No email given");
-        }
-        String USERID_PATTERN =
-                "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-        Pattern p = Pattern.compile(USERID_PATTERN);
-        Matcher m = p.matcher(email);
-        if (!m.matches()) {
-            throw new DomainException("Email not valid");
-        }
-        this.email = email;
+        if (Checker.isValidEmail(email)) this.email = email;
     }
 
     public String getPassword() {
@@ -115,16 +96,12 @@ public class Person {
     }
 
     public void setPassword(String password) {
-        if (Checker.isEmptyString(password)) {
-            throw new DomainException("No password given");
-        }
+        if (Checker.isEmptyString(password)) throw new DomainException("No password given");
         this.password = password;
     }
 
     public void setPasswordHashed(String password) {
-        if (Checker.isEmptyString(password)) {
-            throw new DomainException("No password given");
-        }
+        if (Checker.isEmptyString(password)) throw new DomainException("No password given");
         this.password = hashPassword(password);
     }
 
@@ -149,10 +126,7 @@ public class Person {
     }
 
     public boolean isCorrectPassword(String password) {
-        if (Checker.isEmptyString(password)) {
-            throw new DomainException("No password given");
-        }
-
+        if (Checker.isEmptyString(password)) throw new DomainException("No password given");
         return this.password.equals(hashPassword(password));
     }
 
@@ -161,9 +135,7 @@ public class Person {
     }
 
     public void setFirstName(String firstName) {
-        if (Checker.isEmptyString(firstName)) {
-            throw new DomainException("No firstname given");
-        }
+        if (Checker.isEmptyString(firstName)) throw new DomainException("No firstname given");
         this.firstName = firstName;
     }
 
@@ -172,9 +144,7 @@ public class Person {
     }
 
     public void setLastName(String lastName) {
-        if (Checker.isEmptyString(lastName)) {
-            throw new IllegalArgumentException("No last name given");
-        }
+        if (Checker.isEmptyString(lastName)) throw new IllegalArgumentException("No last name given");
         this.lastName = lastName;
     }
 

@@ -59,6 +59,7 @@ public class PersonDBSQL implements PersonDB {
         } catch (SQLException e) {
             throw new DbException(e.getMessage(), e);
         }
+
         return people;
     }
 

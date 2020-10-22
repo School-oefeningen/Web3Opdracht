@@ -45,5 +45,4 @@ public class DBConnectionManager {
     public Connection getConnection() {
         return this.connection;
     }
-
 }

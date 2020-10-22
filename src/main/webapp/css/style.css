@@ -152,6 +152,10 @@ main {
     padding: 0 var(--mobile-padding);
 }
 
+#addContact {
+    margin-top: 50px;
+}
+
 footer {
     flex-shrink: 0;
     padding: var(--mobile-padding);
@@ -198,14 +202,6 @@ footer {
 
     table {
         width: 100%;
-    }
-
-    tr th:first-of-type {
-        width: 55%;
-    }
-
-    tr th:not(first-of-type) {
-        width: 15%;
     }
 
     input {

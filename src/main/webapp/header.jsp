@@ -5,13 +5,12 @@
     <nav>
         <ul>
             <li ${param.page eq 'Home'?'id="actual"':""}><a href="Controller?command=Home">Home</a></li>
-            <li ${param.page eq 'People overview'?'id="actual"':""}><a href="Controller?command=Overview">Overview</a>
-            </li>
+            <li ${param.page eq 'Users overview'?'id="actual"':""}><a href="Controller?command=usersOverview">Users</a></li>
             <li ${param.page eq 'Register'?'id="actual"':""}><a href="Controller?command=Register">Register</a></li>
 
             <c:if test="${not empty user}">
-                <li ${param.page eq 'Dashboard'?'id="actual"':""}><a href="Controller?command=Dashboard">Dashboard</a>
-                </li>
+                <li ${param.page eq 'Contacts overview'?'id="actual"':""}><a href="Controller?command=ContactsOverview">Contacts</a></li>
+                <li ${param.page eq 'Dashboard'?'id="actual"':""}><a href="Controller?command=Dashboard">Dashboard</a></li>
             </c:if>
         </ul>
     </nav>

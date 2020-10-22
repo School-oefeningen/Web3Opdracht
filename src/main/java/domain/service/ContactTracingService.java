@@ -1,6 +1,6 @@
-package domain.model;
+package domain.service;
 
-import domain.service.PersonService;
+import domain.model.Person;
 
 import java.util.List;
 

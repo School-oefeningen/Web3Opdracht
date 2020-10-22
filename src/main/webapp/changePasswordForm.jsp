@@ -23,6 +23,7 @@
                     </ul>
                 </div>
             </c:if>
+
             <form method="POST" action="Controller?command=ChangePasswordConfirmation">
                 <p><label for="currentPassword">Current password:</label><input type="password" id="currentPassword"
                                                                                 name="currentPassword" required></p>

@@ -12,13 +12,13 @@
 <div id="container">
     <div id="content">
         <jsp:include page="header.jsp">
-            <jsp:param name="page" value="People overview"></jsp:param>
+            <jsp:param name="page" value="Users overview"></jsp:param>
         </jsp:include>
 
         <main>
             <c:choose>
                 <c:when test="${people.size() <= 0}">
-                    <p id="error">De database is leeg.</p>
+                    <p id="error">No users in the database.</p>
                 </c:when>
                 <c:otherwise>
                     <table>
