@@ -46,7 +46,7 @@ public class ContactDBSQL implements ContactDb {
     public List<Contact> getAllFromUser(String userId) {
 
         List<Contact> contacts = new ArrayList<>();
-        String sql = String.format("SELECT * FROM %s.contact WHERE userid = ?", schema);
+        String sql = String.format("SELECT * FROM %s.contact WHERE userid = ? ORDER BY lastname, firstname, date, hour", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);

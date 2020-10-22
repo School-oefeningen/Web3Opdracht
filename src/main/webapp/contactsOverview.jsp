@@ -45,9 +45,11 @@
                 </c:otherwise>
             </c:choose>
 
-            <form method="POST" action="Controller?command=AddContactForm">
-                <p><input type="submit" id="addContact" value="Add contact"></p>
-            </form>
+            <c:if test="${user.userid ne 'admin'}">
+                <form method="POST" action="Controller?command=AddContactForm">
+                    <p><input type="submit" id="addContact" value="Add contact"></p>
+                </form>
+            </c:if>
         </main>
     </div>
     <footer>
