@@ -19,5 +19,12 @@ public interface ContactDb {
      * @return An arraylist with all contacts of a certain stored in the database
      * @throws DbException when there are problems with the connection to the database
      */
-    List<Contact> getAll(String userId);
+    List<Contact> getAllFromUser(String userId);
+
+    /**
+     * Returns a list with all contacts stored in the database
+     * @return An arraylist with all contacts stored in the database
+     * @throws DbException when there are problems with the connection to the database
+     */
+    List<Contact> getAll();
 }

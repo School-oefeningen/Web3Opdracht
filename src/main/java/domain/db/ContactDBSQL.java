@@ -32,8 +32,8 @@ public class ContactDBSQL implements ContactDb {
             statementSql.setString(1, contact.getUserid());
             statementSql.setString(2, contact.getFirstName());
             statementSql.setString(3, contact.getLastName());
-            statementSql.setString(4, contact.getDateString());
-            statementSql.setString(5, contact.getHourString());
+            statementSql.setString(4, contact.getDate().toString());
+            statementSql.setString(5, contact.getHour().toString());
             statementSql.setString(6, contact.getPhoneNumber());
             statementSql.setString(7, contact.getEmail());
             statementSql.execute();
@@ -43,7 +43,7 @@ public class ContactDBSQL implements ContactDb {
     }
 
     @Override
-    public List<Contact> getAll(String userId) {
+    public List<Contact> getAllFromUser(String userId) {
 
         List<Contact> contacts = new ArrayList<>();
         String sql = String.format("SELECT * FROM %s.contact WHERE userid = ?", schema);
@@ -51,6 +51,28 @@ public class ContactDBSQL implements ContactDb {
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
             statementSql.setString(1, userId);
+            ResultSet result = statementSql.executeQuery();
+
+            while (result.next()) {
+
+                Contact contact = makeContact(result);
+                contacts.add(contact);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage(), e);
+        }
+
+        return contacts;
+    }
+
+    @Override
+    public List<Contact> getAll() {
+
+        List<Contact> contacts = new ArrayList<>();
+        String sql = String.format("SELECT * FROM %s.contact ORDER BY firstname, lastname, date, hour", schema);
+
+        try {
+            PreparedStatement statementSql = connection.prepareStatement(sql);
             ResultSet result = statementSql.executeQuery();
 
             while (result.next()) {

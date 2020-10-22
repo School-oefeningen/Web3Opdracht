@@ -66,9 +66,6 @@ public class Contact {
         if (Checker.isValidEmail(email)) this.email = email;
     }
 
-    public String getDateString() {
-        return date.toString();
-    }
 
     public LocalDate getDate() {
         return date;
@@ -77,10 +74,6 @@ public class Contact {
     public void setDate(LocalDate date) {
         if (date == null) throw new DomainException("No date given");
         this.date = date;
-    }
-
-    public String getHourString() {
-        return hour.toString();
     }
 
     public LocalTime getHour() {

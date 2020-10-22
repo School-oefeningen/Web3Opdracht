@@ -45,7 +45,7 @@ public class PersonDBSQL implements PersonDB {
     public List<Person> getAll() {
 
         List<Person> people = new ArrayList<>();
-        String sql = String.format("SELECT * FROM %s.person", schema);
+        String sql = String.format("SELECT * FROM %s.person WHERE userid != 'admin'", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);

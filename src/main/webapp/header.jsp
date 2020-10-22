@@ -5,7 +5,7 @@
     <nav>
         <ul>
             <li ${param.page eq 'Home'?'id="actual"':""}><a href="Controller?command=Home">Home</a></li>
-            <li ${param.page eq 'Users overview'?'id="actual"':""}><a href="Controller?command=usersOverview">Users</a></li>
+            <li ${param.page eq 'Users overview'?'id="actual"':""}><a href="Controller?command=UsersOverview">Users</a></li>
             <li ${param.page eq 'Register'?'id="actual"':""}><a href="Controller?command=Register">Register</a></li>
 
             <c:if test="${not empty user}">

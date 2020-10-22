@@ -16,11 +16,11 @@
         </jsp:include>
 
         <main>
-            <p>Are you sure you want to change your password?</p>
+            <p>Are you sure you want to delete this account?</p>
             <br>
-            <form method="POST" action="Controller?command=DeleteAccount">
-                <p><input type="submit" id="no" value="No, take me to the homepage!"></p>
-                <p><input type="submit" id="yes" name="yes" value="Yes, delete my account"></p>
+            <form method="POST" action="Controller?command=DeleteAccount&userId=<c:out value="${userId}"/>">
+                <p><input type="submit" id="no" value="No, take me to the homepage"></p>
+                <p><input type="submit" id="yes" name="yes" value="Yes, delete this account"></p>
             </form>
         </main>
     </div>

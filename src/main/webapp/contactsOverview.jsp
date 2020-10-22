@@ -34,8 +34,8 @@
                             <tr>
                                 <td><c:out value="${contact.firstName}"/></td>
                                 <td><c:out value="${contact.lastName}"/></td>
-                                <td><c:out value="${contact.getDateString()}"/></td>
-                                <td><c:out value="${contact.getHourString()}"/></td>
+                                <td><c:out value="${contact.getDate().toString()}"/></td>
+                                <td><c:out value="${contact.getHour().toString()}"/></td>
                                 <td><c:out value="${contact.phoneNumber}"/></td>
                                 <td><c:out value="${contact.email}"/></td>
                             </tr>

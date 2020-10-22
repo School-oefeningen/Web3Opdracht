@@ -14,9 +14,13 @@ public class ContactService {
     public ContactService() {
     }
 
-    public List<Contact> getAll(String userId) {
+    public List<Contact> getAllFromUser(String userId) {
         if (Checker.isEmptyString(userId)) throw new DomainException("No user id given");
-        return db.getAll(userId);
+        return db.getAllFromUser(userId);
+    }
+
+    public List<Contact> getAll() {
+        return db.getAll();
     }
 
     public void add(Contact contact) {

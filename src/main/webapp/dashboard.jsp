@@ -29,9 +29,11 @@
                         <form method="POST" action="Controller?command=ChangePasswordForm">
                             <p><input type="submit" id="changePassword" value="Change your password"></p>
                         </form>
-                        <form method="POST" action="Controller?command=DeleteAccountConfirmation">
-                            <p><input type="submit" id="deleteAccount" value="Delete your account"></p>
-                        </form>
+                        <c:if test="${user.userid ne 'admin'}">
+                            <form method="POST" action="Controller?command=DeleteAccountConfirmation&userId=<c:out value="${user.userid}"/>">
+                                <p><input type="submit" id="deleteAccount" value="Delete your account"></p>
+                            </form>
+                        </c:if>
 
                         <br>
 

@@ -34,6 +34,14 @@
                                 <td id="<c:out value="${person.userid}"/>"><c:out value="${person.userid}"/></td>
                                 <td><c:out value="${person.firstName}"/></td>
                                 <td><c:out value="${person.lastName}"/></td>
+
+                                <c:if test="${user.userid eq 'admin'}">
+                                    <td>
+                                        <form method="POST" action="Controller?command=DeleteAccountConfirmation&userId=<c:out value="${person.userid}"/>">
+                                            <input type="image" id="deleteAccountButton" src="images/delete-button.svg" alt="Delete user submit">
+                                        </form>
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                         <caption>Users Overview</caption>
