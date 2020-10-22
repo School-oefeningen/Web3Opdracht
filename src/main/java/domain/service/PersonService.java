@@ -16,14 +16,12 @@ public class PersonService {
 
     public Person get(String personId) {
         // Exception if personId null
-        if (personId == null) {
-            throw new DbException("No id given");
-        }
+        if (personId == null) throw new DbException("No id given");
 
         //Exception if person not in db
         if (!db.personInDb(personId.toLowerCase())) throw new DbException("Person not in database");
 
-        return db.get(personId);
+        return db.get(personId.toLowerCase());
     }
 
     public List<Person> getAll() {
@@ -32,9 +30,7 @@ public class PersonService {
 
     public void add(Person person) {
         // Exception if person is null
-        if (person == null) {
-            throw new DbException("No person given");
-        }
+        if (person == null) throw new DbException("No person given");
 
         //Exception if person in db
         if (db.personInDb(person.getUserid().toLowerCase())) throw new DbException("User already exists");
@@ -45,9 +41,7 @@ public class PersonService {
 
     public void update(Person person) {
         // Exception if person is null
-        if (person == null) {
-            throw new DbException("No person given");
-        }
+        if (person == null) throw new DbException("No person given");
 
         delete(person.getUserid());
         add(person);
@@ -55,9 +49,7 @@ public class PersonService {
 
     public void delete(String personId) {
         // Exception if personId is null
-        if (Checker.isEmptyString(personId)) {
-            throw new DbException("No id given");
-        }
+        if (Checker.isEmptyString(personId)) throw new DbException("No id given");
 
         // Remove person in db
         db.remove(personId);

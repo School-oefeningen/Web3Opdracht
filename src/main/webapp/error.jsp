@@ -17,9 +17,9 @@
         </jsp:include>
 
         <main>
-            <p>${error}</p>
+            <p><c:out value="${error}"/> </p>
             <c:if test="${not empty pageContext.exception}">
-                <p>You caused a ${pageContext.exception} on the server!</p>
+                <p>You caused a <c:out value="${pageContext.exception}"/> on the server!</p>
             </c:if>
         </main>
     </div>

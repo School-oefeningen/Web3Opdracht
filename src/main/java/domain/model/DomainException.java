@@ -18,5 +18,4 @@ public class DomainException extends RuntimeException {
     public DomainException(Throwable exception) {
         super(exception);
     }
-
 }

@@ -19,10 +19,10 @@
             <div class="dashboard-main">
                 <c:choose>
                     <c:when test="${not empty user}">
-                        <p>User id: ${user.userid}</p>
-                        <p>Email: ${user.email}</p>
-                        <p>First name: ${user.firstName}</p>
-                        <p>Last name: ${user.lastName}</p>
+                        <p>User id: <c:out value="${user.userid}"/></p>
+                        <p>Email: <c:out value="${user.email}"/></p>
+                        <p>First name: <c:out value="${user.firstName}"/></p>
+                        <p>Last name: <c:out value="${user.lastName}"/></p>
 
                         <br>
 
@@ -35,9 +35,9 @@
 
                         <br>
 
-                        <p>Registered on: ${user.getRegisterDateTimeToString()}</p>
-                        <p>Last logged in on: ${user.getlastLoginDateTimeToString()}</p>
-                        <p>Amount of times logged in: ${user.amountOfTimesLoggedIn}</p>
+                        <p>Registered on: <c:out value="${user.getRegisterDateTimeToString()}"/></p>
+                        <p>Last logged in on: <c:out value="${user.getlastLoginDateTimeToString()}"/></p>
+                        <p>Amount of times logged in: <c:out value="${user.getAmountOfTimesLoggedIn()}"/></p>
                     </c:when>
                     <c:otherwise>
                         <p>You are not logged in!</p>

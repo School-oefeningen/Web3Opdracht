@@ -18,7 +18,7 @@
         <main>
             <c:choose>
                 <c:when test="${not empty user}">
-                    <p>Welkom, ${user.firstName}!</p>
+                    <p>Welkom, <c:out value="${user.firstName}"/>!</p>
                     <br>
                     <form action="Controller?command=Logout" method="POST">
                         <p><input type="submit" id="signUp" value="Log out"></p>
@@ -28,22 +28,20 @@
                     <c:if test="${not empty error}">
                         <div class="alert-danger">
                             <ul>
-                                <li>${error}</li>
+                                <li><c:out value="${error}"/></li>
                             </ul>
                         </div>
                     </c:if>
                     <c:if test="${not empty succes}">
                         <div class="alert-succes">
                             <ul>
-                                <li>${succes}</li>
+                                <li><c:out value="${succes}"/></li>
                             </ul>
                         </div>
                     </c:if>
                     <form action="Controller?command=Login" method="POST">
-                        <p><label for="userId">Your user id</label><input type="text" id="userId" name="userId"
-                                                                          value="${userIdPrevious}" required></p>
-                        <p><label for="password">Your password</label><input type="password" id="password"
-                                                                             name="password" required></p>
+                        <p><label for="userId">Your user id</label><input type="text" id="userId" name="userId" value="<c:out value="${userIdPrevious}"/>" required></p>
+                        <p><label for="password">Your password</label><input type="password" id="password" name="password" required></p>
                         <p><input type="submit" id="signUp" value="Log in"></p>
                     </form>
                 </c:otherwise>

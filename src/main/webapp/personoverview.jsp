@@ -30,10 +30,10 @@
                         </tr>
                         <c:forEach var="person" items="${people}">
                             <tr>
-                                <td>${person.email}</td>
-                                <td id="${person.userid}">${person.userid}</td>
-                                <td>${person.firstName}</td>
-                                <td>${person.lastName}</td>
+                                <td><c:out value="${person.email}"/></td>
+                                <td id="<c:out value="${person.userid}"/>"><c:out value="${person.userid}"/></td>
+                                <td><c:out value="${person.firstName}"/></td>
+                                <td><c:out value="${person.lastName}"/></td>
                             </tr>
                         </c:forEach>
                         <caption>Users Overview</caption>

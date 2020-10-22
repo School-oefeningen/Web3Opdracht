@@ -15,5 +15,5 @@
             </c:if>
         </ul>
     </nav>
-    <h2>${param.page}</h2>
+    <h2><c:out value="${param.page}"/> </h2>
 </header>
