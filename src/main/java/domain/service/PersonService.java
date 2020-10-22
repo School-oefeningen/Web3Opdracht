@@ -51,11 +51,10 @@ public class PersonService {
         // Exception if personId is null
         if (Checker.isEmptyString(personId)) throw new DbException("No id given");
 
+        // Exception if person is admin
+        if (Checker.isEmptyString("admin")) throw new DbException("Admin can't be removed");
+
         // Remove person in db
         db.remove(personId);
-    }
-
-    public int getNumberOfPersons() {
-        return db.getAll().size();
     }
 }
