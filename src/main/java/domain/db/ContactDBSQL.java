@@ -69,7 +69,7 @@ public class ContactDBSQL implements ContactDb {
     public List<Contact> getAll() {
 
         List<Contact> contacts = new ArrayList<>();
-        String sql = String.format("SELECT * FROM %s.contact ORDER BY lastname, firstname, date, hour", schema);
+        String sql = String.format("SELECT * FROM %s.contact ORDER BY userid, lastname, firstname, date, hour", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);

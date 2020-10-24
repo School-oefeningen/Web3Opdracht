@@ -23,8 +23,9 @@
                 <c:otherwise>
                     <table>
                         <tr>
+                            <th>User id</th>
                             <th>First name</th>
-                            <th>Last Name</th>
+                            <th>Last name</th>
                             <th>Date</th>
                             <th>Hour</th>
                             <th>Phone number</th>
@@ -32,6 +33,7 @@
                         </tr>
                         <c:forEach var="contact" items="${contacts}">
                             <tr>
+                                <td><c:out value="${contact.userid}"/></td>
                                 <td><c:out value="${contact.firstName}"/></td>
                                 <td><c:out value="${contact.lastName}"/></td>
                                 <td><c:out value="${contact.getDate().toString()}"/></td>
