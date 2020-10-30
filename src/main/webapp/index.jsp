@@ -21,7 +21,7 @@
                     <p>Welkom, <c:out value="${user.firstName}"/>!</p>
                     <br>
                     <form action="Controller?command=Logout" method="POST">
-                        <p><input type="submit" id="signUp" value="Log out"></p>
+                        <p><input type="submit" id="logout" value="Log out"></p>
                     </form>
                 </c:when>
                 <c:otherwise>
@@ -42,7 +42,7 @@
                     <form action="Controller?command=Login" method="POST">
                         <p><label for="userId">Your user id</label><input type="text" id="userId" name="userId" value="<c:out value="${userIdPrevious}"/>" required></p>
                         <p><label for="password">Your password</label><input type="password" id="password" name="password" required></p>
-                        <p><input type="submit" id="signUp" value="Log in"></p>
+                        <p><input type="submit" id="login" value="Log in"></p>
                     </form>
                 </c:otherwise>
             </c:choose>

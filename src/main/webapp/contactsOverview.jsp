@@ -33,7 +33,7 @@
                         </tr>
                         <c:forEach var="contact" items="${contacts}">
                             <tr>
-                                <td><c:out value="${contact.userid}"/></td>
+                                <td id="userId"><c:out value="${contact.userid}"/></td>
                                 <td><c:out value="${contact.firstName}"/></td>
                                 <td><c:out value="${contact.lastName}"/></td>
                                 <td><c:out value="${contact.getDate().toString()}"/></td>

@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -35,7 +35,7 @@ public class RegisterTest {
         String title = driver.getTitle();
         assertEquals("Overview", title);
 
-        ArrayList<WebElement> listItems = (ArrayList<WebElement>) driver.findElements(By.cssSelector("table tr"));
+        List<WebElement> listItems = driver.findElements(By.cssSelector("table tr"));
         boolean found = false;
         for (WebElement listItem : listItems) {
             if (listItem.getText().contains("jan.janssens@hotmail.com") && listItem.getText().contains("Jan Janssens")) {
@@ -207,5 +207,4 @@ public class RegisterTest {
         WebElement button = driver.findElement(By.id("signUp"));
         button.click();
     }
-
 }
