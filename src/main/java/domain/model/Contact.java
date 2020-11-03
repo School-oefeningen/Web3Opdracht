@@ -4,6 +4,7 @@ import util.Checker;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Contact {
     private String userId, firstName, lastName, phoneNumber, email;
@@ -66,6 +67,9 @@ public class Contact {
         if (Checker.isValidEmail(email)) this.email = email;
     }
 
+    public String getDateAsString() {
+        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
 
     public LocalDate getDate() {
         return date;
@@ -73,6 +77,7 @@ public class Contact {
 
     public void setDate(LocalDate date) {
         if (date == null) throw new DomainException("No date given");
+        if ((date.isAfter(LocalDate.now()))) throw new DomainException("Date can't be after today");
         this.date = date;
     }
 

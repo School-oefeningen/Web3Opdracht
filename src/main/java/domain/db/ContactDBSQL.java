@@ -1,6 +1,7 @@
 package domain.db;
 
 import domain.model.Contact;
+import domain.model.TestResult;
 import util.DbConnectionService;
 
 import java.sql.Connection;
@@ -73,6 +74,32 @@ public class ContactDBSQL implements ContactDb {
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
+            ResultSet result = statementSql.executeQuery();
+
+            while (result.next()) {
+
+                Contact contact = makeContact(result);
+                contacts.add(contact);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage(), e);
+        }
+
+        return contacts;
+    }
+
+    @Override
+    public List<Contact> getAllFromUserAfterDate(TestResult testResult) {
+
+        List<Contact> contacts = new ArrayList<>();
+        String sql = String.format("SELECT * FROM %s.contact WHERE userid = ?" +
+                "AND TO_DATE(date, 'YYYY-MM-DD') >= TO_DATE(?,'YYYY-MM-DD') " +
+                "ORDER BY lastname, firstname, date, hour", schema);
+
+        try {
+            PreparedStatement statementSql = connection.prepareStatement(sql);
+            statementSql.setString(1, testResult.getUserId());
+            statementSql.setString(2, testResult.getDate().toString());
             ResultSet result = statementSql.executeQuery();
 
             while (result.next()) {

@@ -4,6 +4,7 @@ import domain.db.ContactDBSQL;
 import domain.db.ContactDb;
 import domain.model.Contact;
 import domain.model.DomainException;
+import domain.model.TestResult;
 import util.Checker;
 
 import java.util.List;
@@ -29,5 +30,10 @@ public class ContactService {
 
         // Add contact
         db.add(contact);
+    }
+
+    public List<Contact> getAllFromUserAfterDate(TestResult testResult) {
+        if (testResult == null) throw new DomainException("No test result given");
+        return db.getAllFromUserAfterDate(testResult);
     }
 }

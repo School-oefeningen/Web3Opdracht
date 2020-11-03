@@ -25,11 +25,11 @@
             </c:if>
 
             <form method="POST" action="Controller?command=ChangePasswordConfirmation">
-                <p><label for="currentPassword">Current password:</label><input type="password" id="currentPassword"
+                <p><label for="currentPassword">Current password</label><input type="password" id="currentPassword"
                                                                                 name="currentPassword" required></p>
-                <p><label for="newPassword">New password:</label><input type="password" id="newPassword"
+                <p><label for="newPassword">New password</label><input type="password" id="newPassword"
                                                                         name="newPassword" required></p>
-                <p><label for="newPasswordConfirmation">New password confirmation:</label><input type="password"
+                <p><label for="newPasswordConfirmation">New password confirmation</label><input type="password"
                                                                                                  id="newPasswordConfirmation"
                                                                                                  name="newPasswordConfirmation"
                                                                                                  required></p>

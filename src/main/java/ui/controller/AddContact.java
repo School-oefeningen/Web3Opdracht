@@ -43,7 +43,6 @@ public class AddContact extends RequestHandler {
         String userId = person.getUserid();
         try {
             contact.setUserid(userId);
-            request.setAttribute("userIdPrevious", userId);
         } catch (Exception e) {
             errors.add(e.getMessage());
         }

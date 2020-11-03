@@ -1,6 +1,7 @@
 package domain.db;
 
 import domain.model.Contact;
+import domain.model.TestResult;
 
 import java.util.List;
 
@@ -27,4 +28,11 @@ public interface ContactDb {
      * @throws DbException when there are problems with the connection to the database
      */
     List<Contact> getAll();
+
+    /**
+     * Returns a list with all contacts of a certain person after a certain date stored in the database
+     * @return An arraylist with all contacts of a certain person after a certain date stored in the database
+     * @throws DbException when there are problems with the connection to the database
+     */
+    List<Contact> getAllFromUserAfterDate(TestResult testResult);
 }

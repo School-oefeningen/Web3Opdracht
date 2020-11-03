@@ -32,7 +32,7 @@ public interface PersonDB {
      * @param personId The id of the person
      * @return True if person in database, else false
      */
-    boolean personInDb(String personId);
+    boolean isPersonInDb(String personId);
 
     /**
      * Returns person given its id

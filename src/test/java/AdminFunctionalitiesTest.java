@@ -13,7 +13,7 @@ import java.util.Set;
 
 import static org.junit.Assert.*;
 
-public class AdminFunctionalities {
+public class AdminFunctionalitiesTest {
     private WebDriver driver;
     private String path = "http://localhost:8080/Controller";
     private String userId = "lorenzo";
@@ -71,11 +71,9 @@ public class AdminFunctionalities {
 
     private boolean isThereContactsFromDifferentUsers() {
         List<WebElement> contactsUserIds = driver.findElements(By.cssSelector("table tr td#userId"));
-        System.out.println(contactsUserIds);
         Set<String> userIds = new HashSet<>();
 
         for (WebElement contactUserId: contactsUserIds) {
-            System.out.println(contactUserId.getText());
             userIds.add(contactUserId.getText());
         }
 
@@ -86,15 +84,11 @@ public class AdminFunctionalities {
 
     private boolean retrieveDeleteButtonsFromUsersOverview() {
         ArrayList<WebElement> listItems = (ArrayList<WebElement>) driver.findElements(By.cssSelector("table tr td input"));
-        boolean found = false;
 
         for (WebElement listItem : listItems) {
-            if (listItem.getAttribute("id").equals("deleteAccountButton")) {
-                found = true;
-            }
+            if (listItem.getAttribute("id").equals("deleteAccountButton")) return true;
         }
-
-        return found;
+        return false;
     }
 
     private void loginAsUser() {

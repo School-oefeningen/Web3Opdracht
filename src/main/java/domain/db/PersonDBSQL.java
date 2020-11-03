@@ -78,7 +78,7 @@ public class PersonDBSQL implements PersonDB {
     }
 
     @Override
-    public boolean personInDb(String personId) {
+    public boolean isPersonInDb(String personId) {
 
         String sql = String.format("SELECT * FROM %s.person WHERE userid = ?", schema);
 

@@ -19,7 +19,7 @@ public class PersonService {
         if (personId == null) throw new DbException("No id given");
 
         //Exception if person not in db
-        if (!db.personInDb(personId.toLowerCase())) throw new DbException("Person not in database");
+        if (!db.isPersonInDb(personId.toLowerCase())) throw new DbException("Person not in database");
 
         return db.get(personId.toLowerCase());
     }
@@ -33,7 +33,7 @@ public class PersonService {
         if (person == null) throw new DbException("No person given");
 
         //Exception if person in db
-        if (db.personInDb(person.getUserid().toLowerCase())) throw new DbException("User already exists");
+        if (db.isPersonInDb(person.getUserid().toLowerCase())) throw new DbException("User already exists");
 
         // Add person
         db.add(person);

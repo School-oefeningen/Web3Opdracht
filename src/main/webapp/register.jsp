@@ -37,9 +37,7 @@
             </form>
         </main>
     </div>
-    <footer>
-        &copy; Webontwikkeling 3, UC Leuven-Limburg
-    </footer>
+    <footer> &copy; Lorenzo Catalano, r0790963</footer>
 </div>
 </body>
 </html>

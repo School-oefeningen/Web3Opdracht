@@ -48,11 +48,15 @@
                     </table>
                 </c:otherwise>
             </c:choose>
+
+            <c:if test="${user.userid ne 'admin'}">
+                <form method="POST" action="Controller?command=Register">
+                    <p><input type="submit" id="register" value="Register new user"></p>
+                </form>
+            </c:if>
         </main>
     </div>
-    <footer>
-        &copy; Webontwikkeling 3, UC Leuven-Limburg
-    </footer>
+    <footer> &copy; Lorenzo Catalano, r0790963</footer>
 </div>
 </body>
 </html>

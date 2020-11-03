@@ -15,10 +15,10 @@
             <jsp:param name="page" value="Home"></jsp:param>
         </jsp:include>
 
-        <main>
+        <main class="main">
             <c:choose>
                 <c:when test="${not empty user}">
-                    <p>Welkom, <c:out value="${user.firstName}"/>!</p>
+                    <p>Welcome, <c:out value="${user.firstName}"/>!</p>
                     <br>
                     <form action="Controller?command=Logout" method="POST">
                         <p><input type="submit" id="logout" value="Log out"></p>
