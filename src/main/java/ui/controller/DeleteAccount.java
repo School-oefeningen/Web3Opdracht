@@ -1,6 +1,7 @@
 package ui.controller;
 
 import domain.model.Person;
+import domain.model.Role;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,10 +15,10 @@ public class DeleteAccount extends RequestHandler {
         }
 
         service.delete(request.getParameter("userId"));
-        request.setAttribute("succes", "Your account has succesfully been deleted.");
+        request.setAttribute("succes", "The account has succesfully been deleted.");
 
         Person person = (Person) request.getSession().getAttribute("user");
-        if (person.getUserid().equals("admin")) return "Controller?command=UsersOverview";
+        if (person.getRole() == Role.ADMIN) return "Controller?command=UsersOverview";
         else return "Controller?command=Logout";
     }
 }

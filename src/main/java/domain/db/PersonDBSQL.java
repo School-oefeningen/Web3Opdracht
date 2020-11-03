@@ -1,6 +1,7 @@
 package domain.db;
 
 import domain.model.Person;
+import domain.model.Role;
 import util.DbConnectionService;
 
 import java.sql.Connection;
@@ -23,7 +24,7 @@ public class PersonDBSQL implements PersonDB {
     @Override
     public void add(Person person) {
 
-        String sql = String.format("INSERT INTO %s.person(userid, email, password, firstname, lastname, registerdatetime, lastlogindatetime, amountoftimesloggedin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", schema);
+        String sql = String.format("INSERT INTO %s.person(userid, email, password, firstname, lastname, registerdatetime, lastlogindatetime, amountoftimesloggedin, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
@@ -35,6 +36,7 @@ public class PersonDBSQL implements PersonDB {
             statementSql.setString(6, person.getRegisterDateTimeToString());
             statementSql.setString(7, person.getlastLoginDateTimeToString());
             statementSql.setInt(8, person.getAmountOfTimesLoggedIn());
+            statementSql.setString(9, person.getRole().toString());
             statementSql.execute();
         } catch (SQLException e) {
             throw new DbException(e);
@@ -120,7 +122,9 @@ public class PersonDBSQL implements PersonDB {
         String registerDateTime = result.getString("registerdatetime");
         String lastLoginDateTime = result.getString("lastlogindatetime");
         int amountOfTimesLoggedIn = Integer.parseInt(result.getString("amountoftimesloggedin"));
+        String roleString = result.getString("role");
+        Role role = Role.valueOf(roleString);
 
-        return new Person(userId, email, password, firstName, lastName, registerDateTime, lastLoginDateTime, amountOfTimesLoggedIn);
+        return new Person(userId, email, password, firstName, lastName, registerDateTime, lastLoginDateTime, amountOfTimesLoggedIn, role);
     }
 }

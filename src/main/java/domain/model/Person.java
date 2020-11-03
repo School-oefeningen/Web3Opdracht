@@ -15,11 +15,12 @@ public class Person {
     private LocalDateTime registerDateTime = LocalDateTime.now();
     private LocalDateTime lastLoginDateTime = null;
     private int amountOfTimesLoggedIn = 0;
+    private Role role;
 
     public Person() {
     }
 
-    public Person(String userid, String email, String password, String firstName, String lastName, String registerDateTime, String lastLoginDateTime, int amountOfTimesLoggedIn) {
+    public Person(String userid, String email, String password, String firstName, String lastName, String registerDateTime, String lastLoginDateTime, int amountOfTimesLoggedIn, Role role) {
         setUserid(userid);
         setEmail(email);
         setPassword(password);
@@ -28,6 +29,16 @@ public class Person {
         setRegisterDateTime(registerDateTime);
         setLastLoginDateTime(lastLoginDateTime);
         setAmountOfTimesLoggedIn(amountOfTimesLoggedIn);
+        setRole(role);
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        if (role == null) throw new DomainException("Role can't be null");
+        this.role = role;
     }
 
     public void incrementAmountOfTimesLoggedIn() {

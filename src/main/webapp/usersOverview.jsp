@@ -16,6 +16,14 @@
         </jsp:include>
 
         <main>
+            <c:if test="${not empty succes}">
+                <div class="alert-succes">
+                    <ul>
+                        <li><c:out value="${succes}"/></li>
+                    </ul>
+                </div>
+            </c:if>
+
             <c:choose>
                 <c:when test="${people.size() <= 0}">
                     <p id="error">No users in the database.</p>

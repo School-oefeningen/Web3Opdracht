@@ -2,6 +2,7 @@ package ui.controller;
 
 import domain.db.DbException;
 import domain.model.Person;
+import domain.model.Role;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ public class Add extends RequestHandler {
         setPersonLastName(person, request, errors);
         setPersonEmail(person, request, errors);
         setPersonPassword(person, request, errors);
+        setPersonRole(person, request, errors);
 
         if (errors.size() == 0) {
             try {
@@ -78,6 +80,14 @@ public class Add extends RequestHandler {
         try {
             person.setPasswordHashed(password);
             request.setAttribute("passwordPrevious", password);
+        } catch (Exception e) {
+            errors.add(e.getMessage());
+        }
+    }
+
+    private void setPersonRole(Person person, HttpServletRequest request, List<String> errors) {
+        try {
+            person.setRole(Role.USER);
         } catch (Exception e) {
             errors.add(e.getMessage());
         }

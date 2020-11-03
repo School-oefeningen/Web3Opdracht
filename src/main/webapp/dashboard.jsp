@@ -23,6 +23,7 @@
                         <p>Email: <c:out value="${user.email}"/></p>
                         <p>First name: <c:out value="${user.firstName}"/></p>
                         <p>Last name: <c:out value="${user.lastName}"/></p>
+                        <p>Role: <c:out value="${user.role}"/></p>
 
                         <br>
 

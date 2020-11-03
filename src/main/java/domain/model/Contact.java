@@ -23,7 +23,7 @@ public class Contact {
         setEmail(email);
     }
 
-    public String getUserid() {
+    public String getUserId() {
         return userId;
     }
 

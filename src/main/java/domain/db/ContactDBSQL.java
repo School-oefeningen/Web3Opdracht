@@ -30,7 +30,7 @@ public class ContactDBSQL implements ContactDb {
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
-            statementSql.setString(1, contact.getUserid());
+            statementSql.setString(1, contact.getUserId());
             statementSql.setString(2, contact.getFirstName());
             statementSql.setString(3, contact.getLastName());
             statementSql.setString(4, contact.getDate().toString());
