@@ -14,8 +14,11 @@ public class DeleteAccount extends RequestHandler {
             return "Controller?command=Home";
         }
 
-        service.delete(request.getParameter("userId"));
-        request.setAttribute("succes", "The account has succesfully been deleted.");
+        String userId = request.getParameter("userId");
+        service.delete(userId);
+        contactService.removeFromUser(userId);
+        testResultService.removeFromUser(userId);
+        request.setAttribute("succes", "The account and all its content has succesfully been deleted.");
 
         Person person = (Person) request.getSession().getAttribute("user");
         if (person.getRole() == Role.ADMIN) return "Controller?command=UsersOverview";

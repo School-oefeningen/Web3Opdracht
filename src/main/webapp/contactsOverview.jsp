@@ -19,6 +19,7 @@
             <c:choose>
                 <c:when test="${contacts.size() <= 0}">
                     <p id="error">No contacts to show.</p>
+                    <br>
                 </c:when>
                 <c:otherwise>
                     <table>

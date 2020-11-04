@@ -23,21 +23,23 @@ public interface PersonDB {
 
     /**
      * Removes a person from the database
-     * @param personId The id of the person
+     * @param userId The id of the person
      */
-    void remove(String personId);
+    void remove(String userId);
+
+    void update(Person person);
 
     /**
      * Checks if person is in the database
-     * @param personId The id of the person
+     * @param userId The id of the person
      * @return True if person in database, else false
      */
-    boolean isPersonInDb(String personId);
+    boolean isPersonInDb(String userId);
 
     /**
      * Returns person given its id
-     * @param personId The id of the person
+     * @param userId The id of the person
      * @return Person
      */
-    Person get(String personId);
+    Person get(String userId);
 }

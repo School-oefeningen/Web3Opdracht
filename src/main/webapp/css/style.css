@@ -137,8 +137,8 @@ footer {
         width: auto;
     }
 
-    input {
-        max-width: 300px;
+    input:not(input[type="submit"]) {
+        width: 300px;
     }
 }
 

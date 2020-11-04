@@ -35,4 +35,6 @@ public interface ContactDb {
      * @throws DbException when there are problems with the connection to the database
      */
     List<Contact> getAllFromUserAfterDate(TestResult testResult);
+
+    void removeFromUser(String userId);
 }

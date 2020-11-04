@@ -17,35 +17,28 @@
 
         <main>
             <div class="dashboard-main">
-                <c:choose>
-                    <c:when test="${not empty user}">
-                        <p>User id: <c:out value="${user.userid}"/></p>
-                        <p>Email: <c:out value="${user.email}"/></p>
-                        <p>First name: <c:out value="${user.firstName}"/></p>
-                        <p>Last name: <c:out value="${user.lastName}"/></p>
-                        <p>Role: <c:out value="${user.role}"/></p>
+                <p>User id: <c:out value="${user.userid}"/></p>
+                <p>Email: <c:out value="${user.email}"/></p>
+                <p>First name: <c:out value="${user.firstName}"/></p>
+                <p>Last name: <c:out value="${user.lastName}"/></p>
+                <p>Role: <c:out value="${user.role}"/></p>
 
-                        <br>
+                <br>
 
-                        <form method="POST" action="Controller?command=ChangePasswordForm">
-                            <p><input type="submit" id="changePassword" value="Change your password"></p>
-                        </form>
-                        <c:if test="${user.userid ne 'admin'}">
-                            <form method="POST" action="Controller?command=DeleteAccountConfirmation&userId=<c:out value="${user.userid}"/>">
-                                <p><input type="submit" id="deleteAccount" value="Delete your account"></p>
-                            </form>
-                        </c:if>
+                <form method="POST" action="Controller?command=ChangePasswordForm">
+                    <p><input type="submit" id="changePassword" value="Change your password"></p>
+                </form>
+                <c:if test="${user.role ne 'ADMIN'}">
+                    <form method="POST" action="Controller?command=DeleteAccountConfirmation&userId=<c:out value="${user.userid}"/>">
+                        <p><input type="submit" id="deleteAccount" value="Delete your account"></p>
+                    </form>
+                </c:if>
 
-                        <br>
+                <br>
 
-                        <p>Registered on: <c:out value="${user.getRegisterDateTimeToString()}"/></p>
-                        <p>Last logged in on: <c:out value="${user.getlastLoginDateTimeToString()}"/></p>
-                        <p>Amount of times logged in: <c:out value="${user.getAmountOfTimesLoggedIn()}"/></p>
-                    </c:when>
-                    <c:otherwise>
-                        <p>You are not logged in!</p>
-                    </c:otherwise>
-                </c:choose>
+                <p>Registered on: <c:out value="${user.getRegisterDateTimeToString()}"/></p>
+                <p>Last logged in on: <c:out value="${user.getlastLoginDateTimeToString()}"/></p>
+                <p>Amount of times logged in: <c:out value="${user.getAmountOfTimesLoggedIn()}"/></p>
             </div>
         </main>
     </div>

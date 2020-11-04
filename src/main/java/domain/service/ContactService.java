@@ -36,4 +36,9 @@ public class ContactService {
         if (testResult == null) throw new DomainException("No test result given");
         return db.getAllFromUserAfterDate(testResult);
     }
+
+    public void removeFromUser(String userId) {
+        if (Checker.isEmptyString(userId)) throw new DomainException("No user id given");
+        db.removeFromUser(userId);
+    }
 }

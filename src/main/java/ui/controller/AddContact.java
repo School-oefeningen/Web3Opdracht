@@ -2,12 +2,14 @@ package ui.controller;
 
 import domain.db.DbException;
 import domain.model.Contact;
+import domain.model.DomainException;
 import domain.model.Person;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +75,9 @@ public class AddContact extends RequestHandler {
         try {
             contact.setDate(LocalDate.parse(dateString));
             request.setAttribute("datePrevious", dateString);
-        } catch (Exception e) {
+        } catch (DateTimeParseException e) {
+            errors.add("No date given");
+        } catch (DomainException e) {
             errors.add(e.getMessage());
         }
     }
@@ -83,7 +87,9 @@ public class AddContact extends RequestHandler {
         try {
             contact.setHour(LocalTime.parse(hourString));
             request.setAttribute("hourPrevious", hourString);
-        } catch (Exception e) {
+        } catch (DateTimeParseException e) {
+            errors.add("No hour given");
+        } catch (DomainException e) {
             errors.add(e.getMessage());
         }
     }

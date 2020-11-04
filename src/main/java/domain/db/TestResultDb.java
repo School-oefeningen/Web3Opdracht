@@ -13,4 +13,6 @@ public interface TestResultDb {
     List<TestResult> getAll();
 
     TestResult getTestResultFromUser(String userId);
+
+    void removeFromUser(String userId);
 }

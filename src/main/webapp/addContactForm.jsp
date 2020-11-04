@@ -16,10 +16,12 @@
         </jsp:include>
 
         <main>
-            <c:if test="${not empty error}">
+            <c:if test="${not empty errors}">
                 <div class="alert-danger">
                     <ul>
-                        <li>${error}</li>
+                        <c:forEach var="error" items="${errors}">
+                            <li><c:out value="${error}"/></li>
+                        </c:forEach>
                     </ul>
                 </div>
             </c:if>

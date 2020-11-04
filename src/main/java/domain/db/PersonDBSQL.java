@@ -66,13 +66,13 @@ public class PersonDBSQL implements PersonDB {
     }
 
     @Override
-    public void remove(String personId) {
+    public void remove(String userId) {
 
         String sql = String.format("DELETE FROM %s.person WHERE userid = ?", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
-            statementSql.setString(1, personId);
+            statementSql.setString(1, userId);
             statementSql.execute();
         } catch (SQLException e) {
             throw new DbException(e);
@@ -80,13 +80,30 @@ public class PersonDBSQL implements PersonDB {
     }
 
     @Override
-    public boolean isPersonInDb(String personId) {
+    public void update(Person person) {
+
+        String sql = String.format("UPDATE %s.person SET password = ?, lastlogindatetime = ?, amountoftimesloggedin = ? WHERE userid = ?", schema);
+
+        try {
+            PreparedStatement statementSql = connection.prepareStatement(sql);
+            statementSql.setString(1, person.getPassword());
+            statementSql.setString(2, person.getlastLoginDateTimeToString());
+            statementSql.setInt(3, person.getAmountOfTimesLoggedIn());
+            statementSql.setString(4, person.getUserid());
+            statementSql.execute();
+        } catch (SQLException e) {
+            throw new DbException(e);
+        }
+    }
+
+    @Override
+    public boolean isPersonInDb(String userId) {
 
         String sql = String.format("SELECT * FROM %s.person WHERE userid = ?", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
-            statementSql.setString(1, personId);
+            statementSql.setString(1, userId);
             ResultSet result = statementSql.executeQuery();
 
             return result.next();
@@ -96,13 +113,13 @@ public class PersonDBSQL implements PersonDB {
     }
 
     @Override
-    public Person get(String personId) {
+    public Person get(String userId) {
 
         String sql = String.format("SELECT * FROM %s.person WHERE userid = ?", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
-            statementSql.setString(1, personId);
+            statementSql.setString(1, userId);
             ResultSet result = statementSql.executeQuery();
             result.next();
 
@@ -113,7 +130,6 @@ public class PersonDBSQL implements PersonDB {
     }
 
     private Person makePerson(ResultSet result) throws SQLException {
-
         String userId = result.getString("userid");
         String email = result.getString("email");
         String password = result.getString("password");

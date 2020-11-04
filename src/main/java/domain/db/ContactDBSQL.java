@@ -45,8 +45,8 @@ public class ContactDBSQL implements ContactDb {
 
     @Override
     public List<Contact> getAllFromUser(String userId) {
-
         List<Contact> contacts = new ArrayList<>();
+
         String sql = String.format("SELECT * FROM %s.contact WHERE userid = ? ORDER BY lastname, firstname, date, hour", schema);
 
         try {
@@ -68,8 +68,8 @@ public class ContactDBSQL implements ContactDb {
 
     @Override
     public List<Contact> getAll() {
-
         List<Contact> contacts = new ArrayList<>();
+
         String sql = String.format("SELECT * FROM %s.contact ORDER BY userid, lastname, firstname, date, hour", schema);
 
         try {
@@ -114,8 +114,21 @@ public class ContactDBSQL implements ContactDb {
         return contacts;
     }
 
-    private Contact makeContact(ResultSet result) throws SQLException {
+    @Override
+    public void removeFromUser(String userId) {
 
+        String sql = String.format("DELETE FROM %s.contact WHERE userid = ?", schema);
+
+        try {
+            PreparedStatement statementSql = connection.prepareStatement(sql);
+            statementSql.setString(1, userId);
+            statementSql.execute();
+        } catch (SQLException e) {
+            throw new DbException(e);
+        }
+    }
+
+    private Contact makeContact(ResultSet result) throws SQLException {
         String userId = result.getString("userid");
         String firstName = result.getString("firstname");
         String lastName = result.getString("lastname");

@@ -33,4 +33,9 @@ public class TestResultService {
         // Add test result
         db.add(testResult);
     }
+
+    public void removeFromUser(String userId) {
+        if (Checker.isEmptyString(userId)) throw new DomainException("No user id given");
+        db.removeFromUser(userId);
+    }
 }

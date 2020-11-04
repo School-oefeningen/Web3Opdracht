@@ -91,6 +91,20 @@ public class TestResultDBSQL implements TestResultDb {
         }
     }
 
+    @Override
+    public void removeFromUser(String userId) {
+
+        String sql = String.format("DELETE FROM %s.testresult WHERE userid = ?", schema);
+
+        try {
+            PreparedStatement statementSql = connection.prepareStatement(sql);
+            statementSql.setString(1, userId);
+            statementSql.execute();
+        } catch (SQLException e) {
+            throw new DbException(e);
+        }
+    }
+
     private TestResult makeTestResult(ResultSet result) throws SQLException {
 
         String userId = result.getString("userid");

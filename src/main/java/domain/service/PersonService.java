@@ -4,6 +4,7 @@ import domain.db.DbException;
 import domain.db.PersonDB;
 import domain.db.PersonDBSQL;
 import domain.model.Person;
+import domain.model.Role;
 import util.Checker;
 
 import java.util.List;
@@ -43,8 +44,7 @@ public class PersonService {
         // Exception if person is null
         if (person == null) throw new DbException("No person given");
 
-        delete(person.getUserid());
-        add(person);
+        db.update(person);
     }
 
     public void delete(String personId) {
@@ -52,7 +52,7 @@ public class PersonService {
         if (Checker.isEmptyString(personId)) throw new DbException("No id given");
 
         // Exception if person is admin
-        if (Checker.isEmptyString("admin")) throw new DbException("Admin can't be removed");
+        if (get(personId).getRole() == Role.ADMIN) throw new DbException("Admin can't be removed.");
 
         // Remove person in db
         db.remove(personId);
