@@ -26,8 +26,17 @@ public class Checker {
         return true;
     }
 
+    public static Person getUserInSession(HttpServletRequest request) {
+        return (Person) request.getSession().getAttribute("user");
+    }
+
+    public static void isUserLoggedIn(HttpServletRequest request) {
+        Person person = getUserInSession(request);
+        if (person == null) throw new DomainException("Please log in to see this content.");
+    }
+
     public static void checkRole(HttpServletRequest request, Role[] roles) {
-        Person person = (Person) request.getSession().getAttribute("user");
+        Person person = getUserInSession(request);
         if (person == null) throw new NotAuthorizedException("You are not authorized to see this content!");
 
         boolean allowed = false;

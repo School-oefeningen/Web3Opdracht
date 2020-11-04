@@ -3,6 +3,7 @@ package ui.controller;
 import domain.model.Contact;
 import domain.model.Person;
 import domain.model.Role;
+import util.Checker;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +13,9 @@ public class ContactsOverview extends RequestHandler {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        Person person = (Person) request.getSession().getAttribute("user");
+        Checker.isUserLoggedIn(request);
+        Person person = Checker.getUserInSession(request);
+
         List<Contact> contacts;
 
         if (person.getRole() == Role.ADMIN) contacts = contactService.getAll();

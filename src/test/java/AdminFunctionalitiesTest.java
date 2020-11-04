@@ -69,6 +69,13 @@ public class AdminFunctionalitiesTest {
         assertFalse(isThereContactsFromDifferentUsers());
     }
 
+    @Test
+    public void userNotLoggedInDoesNotSeeContactsGivesErrorMessage() {
+        assertEquals("Home", driver.getTitle());
+        driver.get(path + "?command=ContactsOverview");
+        assertEquals("Please log in to see this content.", driver.findElement(By.className("alert-danger")).getText());
+    }
+
     private boolean isThereContactsFromDifferentUsers() {
         List<WebElement> contactsUserIds = driver.findElements(By.cssSelector("table tr td#userId"));
         Set<String> userIds = new HashSet<>();

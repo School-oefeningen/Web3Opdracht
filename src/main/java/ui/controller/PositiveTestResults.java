@@ -12,6 +12,7 @@ public class PositiveTestResults extends RequestHandler {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws NotAuthorizedException {
+        Checker.isUserLoggedIn(request);
         Checker.roleIsAdmin(request);
 
         List<TestResult> testResults = testResultService.getAll();
