@@ -18,7 +18,8 @@
         <main>
             <p>Are you sure you want to change your password?</p>
             <br>
-            <form method="POST" action="Controller?command=ChangePassword&newPassword=<c:out value="${newPassword}"/>&newPasswordConfirmation=<c:out value="${newPasswordConfirmation}"/>">
+            <form method="POST" action="Controller?command=ChangePassword">
+                <p><input type="hidden" name="newPassword" value="<c:out value="${newPassword}"/>"></p>
                 <p><input type="submit" id="no" value="No, take me to the homepage"></p>
                 <p><input type="submit" id="yes" name="yes" value="Yes, change my password"></p>
             </form>

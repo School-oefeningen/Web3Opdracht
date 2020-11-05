@@ -24,7 +24,6 @@ public class ChangePasswordConfirmation extends RequestHandler {
 
             // If all checks passed
             request.setAttribute("newPassword", newPassword);
-            request.setAttribute("newPasswordConfirmation", newPasswordConfirmation);
             return "changePasswordConfirmation.jsp";
         } catch (DomainException e) {
             request.setAttribute("error", e.getMessage());
