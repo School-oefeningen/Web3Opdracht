@@ -98,9 +98,7 @@ public class AdminFunctionalitiesTest {
         return false;
     }
 
-    private void loginAsUser() {
-        submitForm(userId, userPassword);
-    }
+    private void loginAsUser() { submitForm(userId, userPassword); }
 
     private void loginAsAdmin() {
         submitForm(adminId, adminPassword);

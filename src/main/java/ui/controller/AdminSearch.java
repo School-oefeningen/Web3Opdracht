@@ -7,7 +7,7 @@ import util.Checker;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,10 +18,9 @@ public class AdminSearch extends RequestHandler {
         Checker.isUserLoggedIn(request);
         Checker.roleIsAdmin(request);
 
-        Map<TestResult, List<Contact>> testResultsContactsMap = new HashMap<>();
+        Map<TestResult, List<Contact>> testResultsContactsMap = new LinkedHashMap<>();
 
-        List<TestResult> testResults = testResultService.getAll();
-        for (TestResult t: testResults) {
+        for (TestResult t: testResultService.getAll()) {
             testResultsContactsMap.put(t, contactService.getAllFromUserAfterDate(t));
         }
 

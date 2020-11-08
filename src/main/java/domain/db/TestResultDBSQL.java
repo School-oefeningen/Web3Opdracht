@@ -56,7 +56,7 @@ public class TestResultDBSQL implements TestResultDb {
     public List<TestResult> getAll() {
 
         List<TestResult> testResults = new ArrayList<>();
-        String sql = String.format("SELECT * FROM %s.testresult ORDER BY date", schema);
+        String sql = String.format("SELECT * FROM %s.testresult ORDER BY date, userid", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
