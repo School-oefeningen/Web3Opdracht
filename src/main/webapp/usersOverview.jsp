@@ -31,17 +31,17 @@
                 <c:otherwise>
                     <table>
                         <tr>
-                            <th>E-mail</th>
                             <th>User id</th>
                             <th>First Name</th>
                             <th>Last Name</th>
+                            <th>E-mail</th>
                         </tr>
                         <c:forEach var="person" items="${people}">
                             <tr>
-                                <td><c:out value="${person.email}"/></td>
                                 <td id="<c:out value="${person.userid}"/>"><c:out value="${person.userid}"/></td>
                                 <td><c:out value="${person.firstName}"/></td>
                                 <td><c:out value="${person.lastName}"/></td>
+                                <td><c:out value="${person.email}"/></td>
 
                                 <c:if test="${user.userid eq 'admin'}">
                                     <td>

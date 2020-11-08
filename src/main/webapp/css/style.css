@@ -89,6 +89,7 @@ nav ul li#actual {
 nav ul li a {
     display: block;
     text-decoration: none;
+    text-align: center;
     color: #FFF;
     padding: 25px 30px;
     transition: background-color .2s;

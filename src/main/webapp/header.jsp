@@ -13,7 +13,7 @@
 
                     <c:choose>
                         <c:when test="${user.role eq 'ADMIN'}">
-                            <li ${param.page eq 'Postive test results'?'id="actual"':""}><a href="Controller?command=PositiveTestResults">Positive test results</a></li>
+                            <li ${param.page eq 'Admin search'?'id="actual"':""}><a href="Controller?command=AdminSearch">Admin search</a></li>
                         </c:when>
                         <c:otherwise>
                             <li ${param.page eq 'Register test result'?'id="actual"':""}><a href="Controller?command=RegisterTestResult">Register test result</a></li>
@@ -22,10 +22,6 @@
                     </c:choose>
 
                     <li ${param.page eq 'Dashboard'?'id="actual"':""}><a href="Controller?command=Dashboard">Dashboard</a></li>
-                </c:if>
-
-                <c:if test="${user.role eq 'ADMIN'}">
-                    <li ${param.page eq 'Admin'?'id="actual"':""}><a href="Controller?command=Admin">Admin</a></li>
                 </c:if>
             </ul>
         </nav>

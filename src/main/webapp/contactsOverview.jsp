@@ -16,6 +16,11 @@
         </jsp:include>
 
         <main>
+            <c:if test="${not empty testResult}">
+                <p>Your last positive Covid-19 test has been registered on: <c:out value="${testResult.getDateAsString()}"></c:out></p>
+                <br>
+            </c:if>
+
             <c:choose>
                 <c:when test="${contacts.size() <= 0}">
                     <p id="error">No contacts to show.</p>

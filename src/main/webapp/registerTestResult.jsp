@@ -27,7 +27,7 @@
             </c:if>
 
             <c:if test="${not empty testResult}">
-                <p>Your last positive Covid-19 test has been registered on: <c:out value="${testResult.getDateAsString()}"></c:out></p>
+                <p>Your last positive Covid-19 test has been registered on: <c:out value="${testResult.getDateAsString()}"/></p>
                 <br>
             </c:if>
             <form method="POST" action="Controller?command=AddRegisterTestResult">

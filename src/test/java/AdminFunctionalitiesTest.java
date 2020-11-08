@@ -110,8 +110,7 @@ public class AdminFunctionalitiesTest {
         fillOutField("userId", userId);
         fillOutField("password", password);
 
-        WebElement button = driver.findElement(By.id("login"));
-        button.click();
+        driver.findElement(By.id("login")).click();
     }
 
     private void fillOutField(String name, String value) {

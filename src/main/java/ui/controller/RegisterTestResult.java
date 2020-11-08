@@ -15,8 +15,8 @@ public class RegisterTestResult extends RequestHandler {
         Person person = Checker.getUserInSession(request);
 
         TestResult testResult = testResultService.getTestResultFromUser(person.getUserid());
-
         if (testResult != null) request.setAttribute("testResult", testResult);
+
         return "registerTestResult.jsp";
     }
 }
