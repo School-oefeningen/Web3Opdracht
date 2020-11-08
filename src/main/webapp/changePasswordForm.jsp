@@ -12,7 +12,7 @@
 <div id="container">
     <div id="content">
         <jsp:include page="header.jsp">
-            <jsp:param name="page" value="Change password"></jsp:param>
+            <jsp:param name="page" value="Change password"/>
         </jsp:include>
 
         <main>
