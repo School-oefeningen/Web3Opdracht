@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Postive test results</title>
+    <title>Admin search</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -25,34 +25,38 @@
                     <c:forEach var="el" items="${testResultsContactsMap}">
                         <p>The user <c:out value="${el.key.userId}"/> has been tested positive on: <c:out value="${el.key.getDateAsString()}"/></p>
 
-                        <table>
-                            <tr>
-                                <th>User id</th>
-                                <th>First name</th>
-                                <th>Last name</th>
-                                <th>Date</th>
-                                <th>Hour</th>
-                                <th>Phone number</th>
-                                <th>Email</th>
-                            </tr>
-
-                            <c:forEach var="contact" items="${el.value}">
-                                <tr>
-                                    <td id="userId"><c:out value="${contact.userId}"/></td>
-                                    <td><c:out value="${contact.firstName}"/></td>
-                                    <td><c:out value="${contact.lastName}"/></td>
-                                    <td><c:out value="${contact.getDateAsString()}"/></td>
-                                    <td><c:out value="${contact.getHour().toString()}"/></td>
-                                    <td><c:out value="${contact.phoneNumber}"/></td>
-                                    <td><c:out value="${contact.email}"/></td>
-                                </tr>
-                            </c:forEach>
-
-                            <caption>Contacts of a positive user</caption>
-                        </table>
-                        <br>
+                        <c:choose>
+                            <c:when test="${empty el.value}">
+                                <p>No contacts to show.</p>
+                                <br>
+                            </c:when>
+                            <c:otherwise>
+                                <table>
+                                    <tr>
+                                        <th>User id</th>
+                                        <th>First name</th>
+                                        <th>Last name</th>
+                                        <th>Date</th>
+                                        <th>Hour</th>
+                                        <th>Phone number</th>
+                                        <th>Email</th>
+                                    </tr>
+                                    <c:forEach var="contact" items="${el.value}">
+                                        <tr>
+                                            <td id="userId"><c:out value="${contact.userId}"/></td>
+                                            <td><c:out value="${contact.firstName}"/></td>
+                                            <td><c:out value="${contact.lastName}"/></td>
+                                            <td><c:out value="${contact.getDateAsString()}"/></td>
+                                            <td><c:out value="${contact.getHour().toString()}"/></td>
+                                            <td><c:out value="${contact.phoneNumber}"/></td>
+                                            <td><c:out value="${contact.email}"/></td>
+                                        </tr>
+                                    </c:forEach>
+                                    <caption>Contacts of a positive user</caption>
+                                </table>
+                            </c:otherwise>
+                        </c:choose>
                     </c:forEach>
-
                 </c:otherwise>
             </c:choose>
         </main>
