@@ -21,7 +21,7 @@ public class ContactDBSQL implements ContactDb {
     @Override
     public void add(Contact contact) {
 
-        String sql = String.format("INSERT INTO %s.contact(userid, firstname, lastname, timestamp, phonenumber, email) VALUES (?, ?, ?, ?, ?, ?, ?);", schema);
+        String sql = String.format("INSERT INTO %s.contact(userid, firstname, lastname, timestamp, phonenumber, email) VALUES (?, ?, ?, ?, ?, ?);", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);

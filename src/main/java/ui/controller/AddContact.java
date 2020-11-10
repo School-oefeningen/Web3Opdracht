@@ -74,17 +74,29 @@ public class AddContact extends RequestHandler {
     private void setContactTimestamp(Contact contact, HttpServletRequest request, List<String> errors) {
         String dateString = request.getParameter("date").trim();
         String hourString = request.getParameter("hour").trim();
-        try {
-            LocalDate date = LocalDate.parse(dateString);
-            LocalTime time = LocalTime.parse(hourString);
-            LocalDateTime dateTime = LocalDateTime.of(date, time);
-            Timestamp timestamp = Timestamp.valueOf(dateTime);
+        LocalDate date = null;
+        LocalTime hour = null;
 
-            contact.setTimestamp(timestamp);
+        try {
+            date = LocalDate.parse(dateString);
             request.setAttribute("datePrevious", dateString);
+        } catch (DateTimeParseException e) {
+            errors.add("No valid date given");
+        }
+
+        try {
+            hour = LocalTime.parse(hourString);
             request.setAttribute("hourPrevious", hourString);
         } catch (DateTimeParseException e) {
-            errors.add("No valid timestamp given");
+            errors.add("No valid hour given");
+        }
+
+        try {
+            if (date != null && hour != null) {
+                LocalDateTime dateTime = LocalDateTime.of(date, hour);
+                Timestamp timestamp = Timestamp.valueOf(dateTime);
+                contact.setTimestamp(timestamp);
+            }
         } catch (DomainException e) {
             errors.add(e.getMessage());
         }
