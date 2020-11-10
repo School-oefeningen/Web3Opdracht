@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,7 @@
                 <c:otherwise>
 
                     <c:forEach var="el" items="${testResultsContactsMap}">
-                        <p>The user <c:out value="${el.key.userId}"/> has been tested positive on: <c:out value="${el.key.getDateAsString()}"/></p>
+                        <p>The user <c:out value="${el.key.userId}"/> has been tested positive on: <fmt:formatDate pattern="dd/MM/yyyy" value="${el.key.date}"/></p>
 
                         <c:choose>
                             <c:when test="${empty el.value}">
@@ -46,8 +47,8 @@
                                             <td id="userId"><c:out value="${contact.userId}"/></td>
                                             <td><c:out value="${contact.firstName}"/></td>
                                             <td><c:out value="${contact.lastName}"/></td>
-                                            <td><c:out value="${contact.getDateAsString()}"/></td>
-                                            <td><c:out value="${contact.getHour().toString()}"/></td>
+                                            <td><fmt:formatDate pattern="dd/MM/yyyy" value="${contact.timestamp}"/></td>
+                                            <td><fmt:formatDate pattern="HH:mm" value="${contact.timestamp}"/></td>
                                             <td><c:out value="${contact.phoneNumber}"/></td>
                                             <td><c:out value="${contact.email}"/></td>
                                         </tr>

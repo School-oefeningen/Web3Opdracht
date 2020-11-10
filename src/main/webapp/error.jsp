@@ -17,7 +17,9 @@
         </jsp:include>
 
         <main>
-            <p class="alert-danger"><c:out value="${error}"/></p>
+            <c:if test="${not empty error}">
+                <p class="alert-danger"><c:out value="${error}"/></p>
+            </c:if>
 
             <c:if test="${not empty pageContext.exception}">
                 <p class="alert-danger">You caused a <c:out value="${pageContext.exception}"/> on the server!</p>

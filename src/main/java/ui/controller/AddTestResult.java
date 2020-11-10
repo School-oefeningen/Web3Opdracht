@@ -6,11 +6,12 @@ import domain.model.TestResult;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddRegisterTestResult extends RequestHandler {
+public class AddTestResult extends RequestHandler {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
@@ -45,7 +46,8 @@ public class AddRegisterTestResult extends RequestHandler {
     private void setTestResultDate(TestResult testResult, HttpServletRequest request, List<String> errors) {
         String dateString = request.getParameter("date").trim();
         try {
-            testResult.setDate(LocalDate.parse(dateString));
+            Date date = Date.valueOf(LocalDate.parse(dateString));
+            testResult.setDate(date);
         } catch (Exception e) {
             errors.add(e.getMessage());
         }

@@ -6,28 +6,26 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.sql.Timestamp;
 
 public class Person {
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy, HH:mm:ss");
     private String userid, email, password, firstName, lastName;
-    private LocalDateTime registerDateTime = LocalDateTime.now();
-    private LocalDateTime lastLoginDateTime = null;
+    private Timestamp register = new Timestamp(System.currentTimeMillis());
+    private Timestamp lastLogin = null;
     private int amountOfTimesLoggedIn = 0;
     private Role role;
 
     public Person() {
     }
 
-    public Person(String userid, String email, String password, String firstName, String lastName, String registerDateTime, String lastLoginDateTime, int amountOfTimesLoggedIn, Role role) {
+    public Person(String userid, String email, String password, String firstName, String lastName, Timestamp register, Timestamp lastLogin, int amountOfTimesLoggedIn, Role role) {
         setUserid(userid);
         setEmail(email);
         setPassword(password);
         setFirstName(firstName);
         setLastName(lastName);
-        setRegisterDateTime(registerDateTime);
-        setLastLoginDateTime(lastLoginDateTime);
+        setRegister(register);
+        setLastLogin(lastLogin);
         setAmountOfTimesLoggedIn(amountOfTimesLoggedIn);
         setRole(role);
     }
@@ -54,35 +52,22 @@ public class Person {
         this.amountOfTimesLoggedIn = amountOfTimesLoggedIn;
     }
 
-    public LocalDateTime getRegisterDateTime() {
-        return registerDateTime;
+    public Timestamp getRegister() {
+        return register;
     }
 
-    public String getRegisterDateTimeToString() {
-        return formatDateTimeToString(registerDateTime);
+    public void setRegister(Timestamp register) {
+        if (register == null) throw new DomainException("Register can't be null");
+        this.register = register;
     }
 
-    public void setRegisterDateTime(String registerDateTime) {
-        if (Checker.isEmptyString(registerDateTime))
-            throw new DomainException("Register date time can't be null");
-        this.registerDateTime = formatStringToDateTime(registerDateTime);
+    public Timestamp getLastLogin() {
+        return lastLogin;
     }
 
-    public LocalDateTime getLastLoginDateTime() {
-        return lastLoginDateTime;
-    }
-
-    public String getlastLoginDateTimeToString() {
-        return formatDateTimeToString(lastLoginDateTime);
-    }
-
-    public void setLastLoginDateTime(String lastLoginDateTime) {
-        if (lastLoginDateTime == null) this.lastLoginDateTime = null;
-        else formatStringToDateTime(lastLoginDateTime);
-    }
-
-    public void setLastLoginDateTime() {
-        this.lastLoginDateTime = LocalDateTime.now();
+    public void setLastLogin(Timestamp lastLogin) {
+        if (lastLogin == null) this.lastLogin = null;
+        this.lastLogin = lastLogin;
     }
 
     public String getUserid() {
@@ -162,15 +147,5 @@ public class Person {
     @Override
     public String toString() {
         return getFirstName() + " " + getLastName() + ": " + getUserid() + ", " + getEmail();
-    }
-
-    private String formatDateTimeToString(LocalDateTime ldt) {
-        if (ldt == null) return null;
-        return ldt.format(FORMATTER);
-    }
-
-    private LocalDateTime formatStringToDateTime(String dateTimeString) {
-        if (Checker.isEmptyString(dateTimeString)) throw new DomainException("Date time string can't be null");
-        return LocalDateTime.parse(dateTimeString, FORMATTER);
     }
 }

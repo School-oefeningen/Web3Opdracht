@@ -24,8 +24,6 @@ public class AdminSearch extends RequestHandler {
             testResultsContactsMap.put(t, contactService.getAllFromUserAfterDate(t));
         }
 
-        System.out.println(testResultsContactsMap);
-
         request.setAttribute("testResultsContactsMap", testResultsContactsMap);
         return "adminSearch.jsp";
     }

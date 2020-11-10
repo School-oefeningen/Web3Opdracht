@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,10 +28,10 @@
             </c:if>
 
             <c:if test="${not empty testResult}">
-                <p>Your last positive Covid-19 test has been registered on: <c:out value="${testResult.getDateAsString()}"/></p>
+                <p>Your last positive Covid-19 test has been registered on: <fmt:formatDate pattern="dd/MM/yyyy" value="${testResult.date}"/></p>
                 <br>
             </c:if>
-            <form method="POST" action="Controller?command=AddRegisterTestResult">
+            <form method="POST" action="Controller?command=AddTestResult">
                 <p><label for="date">Date</label><input type="date" id="date" name="date" required></p>
                 <p><input type="submit" id="registerTestResult" value="Register new positive test result"></p>
             </form>

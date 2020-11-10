@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,9 +37,9 @@
 
                 <br>
 
-                <p>Registered on: <c:out value="${user.getRegisterDateTimeToString()}"/></p>
-                <p>Last logged in on: <c:out value="${user.getlastLoginDateTimeToString()}"/></p>
-                <p>Amount of times logged in: <c:out value="${user.getAmountOfTimesLoggedIn()}"/></p>
+                <p>Registered on: <fmt:formatDate pattern="dd/MM/yyyy, HH:mm:ss" value="${user.register}"/></p>
+                <p>Last logged in on: <fmt:formatDate pattern="dd/MM/yyyy, HH:mm:ss" value="${user.lastLogin}"/></p>
+                <p>Amount of times logged in: <c:out value="${user.amountOfTimesLoggedIn}"/></p>
             </div>
         </main>
     </div>

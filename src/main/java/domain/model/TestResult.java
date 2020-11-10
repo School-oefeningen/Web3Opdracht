@@ -2,16 +2,16 @@ package domain.model;
 
 import util.Checker;
 
+import java.sql.Date;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class TestResult {
     private String userId;
-    private LocalDate date;
+    private Date date;
 
     public TestResult() {}
 
-    public TestResult(String userId, LocalDate date) {
+    public TestResult(String userId, Date date) {
         setUserId(userId);
         setDate(date);
     }
@@ -25,17 +25,13 @@ public class TestResult {
         this.userId = userId;
     }
 
-    public String getDateAsString() {
-        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-    }
-
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         if (date == null) throw new DomainException("Date can't be null");
-        if ((date.isAfter(LocalDate.now()))) throw new DomainException("Date can't be after today");
+        if (date.after(Date.valueOf(LocalDate.now()))) throw new DomainException("Date can't be after today");
         this.date = date;
     }
 }

@@ -4,12 +4,7 @@ import domain.model.Contact;
 import domain.model.TestResult;
 import util.DbConnectionService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,17 +21,16 @@ public class ContactDBSQL implements ContactDb {
     @Override
     public void add(Contact contact) {
 
-        String sql = String.format("INSERT INTO %s.contact(userid, firstname, lastname, date, hour, phonenumber, email) VALUES (?, ?, ?, ?, ?, ?, ?);", schema);
+        String sql = String.format("INSERT INTO %s.contact(userid, firstname, lastname, timestamp, phonenumber, email) VALUES (?, ?, ?, ?, ?, ?, ?);", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
             statementSql.setString(1, contact.getUserId());
             statementSql.setString(2, contact.getFirstName());
             statementSql.setString(3, contact.getLastName());
-            statementSql.setString(4, contact.getDate().toString());
-            statementSql.setString(5, contact.getHour().toString());
-            statementSql.setString(6, contact.getPhoneNumber());
-            statementSql.setString(7, contact.getEmail());
+            statementSql.setTimestamp(4, contact.getTimestamp());
+            statementSql.setString(5, contact.getPhoneNumber());
+            statementSql.setString(6, contact.getEmail());
             statementSql.execute();
         } catch (SQLException e) {
             throw new DbException(e);
@@ -47,7 +41,7 @@ public class ContactDBSQL implements ContactDb {
     public List<Contact> getAllFromUser(String userId) {
         List<Contact> contacts = new ArrayList<>();
 
-        String sql = String.format("SELECT * FROM %s.contact WHERE userid = ? ORDER BY lastname, firstname, date, hour", schema);
+        String sql = String.format("SELECT * FROM %s.contact WHERE userid = ? ORDER BY lastname, firstname, timestamp", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
@@ -70,7 +64,7 @@ public class ContactDBSQL implements ContactDb {
     public List<Contact> getAll() {
         List<Contact> contacts = new ArrayList<>();
 
-        String sql = String.format("SELECT * FROM %s.contact ORDER BY userid, lastname, firstname, date, hour", schema);
+        String sql = String.format("SELECT * FROM %s.contact ORDER BY userid, lastname, firstname, timestamp", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
@@ -93,13 +87,13 @@ public class ContactDBSQL implements ContactDb {
 
         List<Contact> contacts = new ArrayList<>();
         String sql = String.format("SELECT * FROM %s.contact WHERE userid = ?" +
-                "AND TO_DATE(date, 'YYYY-MM-DD') >= TO_DATE(?,'YYYY-MM-DD') " +
-                "ORDER BY lastname, firstname, date, hour", schema);
+                "AND timestamp >= ? " +
+                "ORDER BY lastname, firstname, timestamp", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
             statementSql.setString(1, testResult.getUserId());
-            statementSql.setString(2, testResult.getDate().toString());
+            statementSql.setDate(2, testResult.getDate());
             ResultSet result = statementSql.executeQuery();
 
             while (result.next()) {
@@ -132,13 +126,12 @@ public class ContactDBSQL implements ContactDb {
         String userId = result.getString("userid");
         String firstName = result.getString("firstname");
         String lastName = result.getString("lastname");
-        String dateString = result.getString("date");
-        LocalDate date = LocalDate.parse(dateString);
-        String hourString = result.getString("hour");
-        LocalTime hour = LocalTime.parse(hourString);
+
+        Timestamp timestamp = result.getTimestamp("timestamp");
+
         String phonenumber = result.getString("phonenumber");
         String email = result.getString("email");
 
-        return new Contact(userId, firstName, lastName, date, hour, phonenumber, email);
+        return new Contact(userId, firstName, lastName, timestamp, phonenumber, email);
     }
 }

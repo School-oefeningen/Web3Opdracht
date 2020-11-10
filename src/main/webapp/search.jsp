@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +23,7 @@
                 </c:when>
                 <c:otherwise>
                     <c:if test="${not empty testResult}">
-                        <p>Your last positive Covid-19 test has been registered on: <c:out value="${testResult.getDateAsString()}"></c:out></p>
+                        <p>Your last positive Covid-19 test has been registered on: <fmt:formatDate pattern="dd/MM/yyyy" value="${testResult.date}"/></p>
                         <br>
                     </c:if>
 
@@ -38,7 +39,7 @@
                             <tr>
                                 <td><c:out value="${contact.firstName}"/></td>
                                 <td><c:out value="${contact.lastName}"/></td>
-                                <td><c:out value="${contact.getDateAsString()}"/></td>
+                                <td><fmt:formatDate pattern="dd/MM/yyyy" value="${contact.timestamp}"/></td>
                                 <td><c:out value="${contact.phoneNumber}"/></td>
                                 <td><c:out value="${contact.email}"/></td>
                             </tr>

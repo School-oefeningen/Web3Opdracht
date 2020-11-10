@@ -3,11 +3,7 @@ package domain.db;
 import domain.model.TestResult;
 import util.DbConnectionService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDate;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +25,7 @@ public class TestResultDBSQL implements TestResultDb {
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
             statementSql.setString(1, testResult.getUserId());
-            statementSql.setString(2, testResult.getDate().toString());
+            statementSql.setDate(2, testResult.getDate());
             statementSql.execute();
         } catch (SQLException e) {
             throw new DbException(e);
@@ -106,10 +102,8 @@ public class TestResultDBSQL implements TestResultDb {
     }
 
     private TestResult makeTestResult(ResultSet result) throws SQLException {
-
         String userId = result.getString("userid");
-        String dateString = result.getString("date");
-        LocalDate date = LocalDate.parse(dateString);
+        Date date = result.getDate("date");
 
         return new TestResult(userId, date);
     }

@@ -6,6 +6,7 @@ import domain.model.Person;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
 
 public class Login extends RequestHandler {
 
@@ -17,7 +18,8 @@ public class Login extends RequestHandler {
             Person person = service.get(userId);
 
             if (person != null && person.isCorrectPassword(request.getParameter("password").trim())) {
-                person.setLastLoginDateTime();
+                Timestamp newLastLogin = new Timestamp(System.currentTimeMillis());
+                person.setLastLogin(newLastLogin);
                 person.incrementAmountOfTimesLoggedIn();
                 service.update(person);
 

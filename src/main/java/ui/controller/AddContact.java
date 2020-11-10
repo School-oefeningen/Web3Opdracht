@@ -7,7 +7,9 @@ import domain.model.Person;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -23,8 +25,7 @@ public class AddContact extends RequestHandler {
         setContactUserId(contact, request, errors);
         setContactFirstName(contact, request, errors);
         setContactLastName(contact, request, errors);
-        setContactDate(contact, request, errors);
-        setContactHour(contact, request, errors);
+        setContactTimestamp(contact, request, errors);
         setContactPhoneNumber(contact, request, errors);
         setContactEmail(contact, request, errors);
 
@@ -70,25 +71,20 @@ public class AddContact extends RequestHandler {
         }
     }
 
-    private void setContactDate(Contact contact, HttpServletRequest request, List<String> errors) {
+    private void setContactTimestamp(Contact contact, HttpServletRequest request, List<String> errors) {
         String dateString = request.getParameter("date").trim();
-        try {
-            contact.setDate(LocalDate.parse(dateString));
-            request.setAttribute("datePrevious", dateString);
-        } catch (DateTimeParseException e) {
-            errors.add("No date given");
-        } catch (DomainException e) {
-            errors.add(e.getMessage());
-        }
-    }
-
-    private void setContactHour(Contact contact, HttpServletRequest request, List<String> errors) {
         String hourString = request.getParameter("hour").trim();
         try {
-            contact.setHour(LocalTime.parse(hourString));
+            LocalDate date = LocalDate.parse(dateString);
+            LocalTime time = LocalTime.parse(hourString);
+            LocalDateTime dateTime = LocalDateTime.of(date, time);
+            Timestamp timestamp = Timestamp.valueOf(dateTime);
+
+            contact.setTimestamp(timestamp);
+            request.setAttribute("datePrevious", dateString);
             request.setAttribute("hourPrevious", hourString);
         } catch (DateTimeParseException e) {
-            errors.add("No hour given");
+            errors.add("No valid timestamp given");
         } catch (DomainException e) {
             errors.add(e.getMessage());
         }
