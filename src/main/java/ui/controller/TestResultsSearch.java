@@ -16,14 +16,14 @@ public class TestResultsSearch extends RequestHandler {
         Checker.isUserLoggedIn(request);
         Person person = Checker.getUserInSession(request);
 
-        TestResult testResult = testResultService.getTestResultFromUser(person.getUserid());
+        TestResult testResult = contactTracingService.getTestResultFromUser(person.getUserid());
 
         if (testResult == null) {
             request.setAttribute("error", "You are not positive to Covid-19!");
             return "search.jsp";
         }
 
-        List<Contact> contacts = contactService.getAllFromUserAfterDate(testResult);
+        List<Contact> contacts = contactTracingService.getAllContactFromUserAfterDate(testResult);
 
         if (contacts.isEmpty()) request.setAttribute("error", "No contacts to show.");
 

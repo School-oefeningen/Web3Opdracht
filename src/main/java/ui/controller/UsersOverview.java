@@ -10,7 +10,7 @@ public class UsersOverview extends RequestHandler {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        List<Person> people = service.getAll();
+        List<Person> people = contactTracingService.getAllPersons();
         request.setAttribute("people", people);
         return "usersOverview.jsp";
     }

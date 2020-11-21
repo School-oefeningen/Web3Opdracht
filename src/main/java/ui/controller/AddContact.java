@@ -31,7 +31,7 @@ public class AddContact extends RequestHandler {
 
         if (errors.size() == 0) {
             try {
-                contactService.add(contact);
+                contactTracingService.addContact(contact);
                 return "Controller?command=ContactsOverview";
             } catch (DbException e) {
                 errors.add(e.getMessage());

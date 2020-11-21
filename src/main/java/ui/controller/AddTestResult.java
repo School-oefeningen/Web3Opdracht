@@ -23,7 +23,7 @@ public class AddTestResult extends RequestHandler {
 
         if (errors.size() == 0) {
             try {
-                testResultService.add(testResult);
+                contactTracingService.addTestResult(testResult);
                 return "Controller?command=TestResultsSearch";
             } catch (DbException e) {
                 errors.add(e.getMessage());

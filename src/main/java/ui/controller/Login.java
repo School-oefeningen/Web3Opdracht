@@ -15,13 +15,13 @@ public class Login extends RequestHandler {
 
         try {
             String userId = request.getParameter("userId").trim();
-            Person person = service.get(userId);
+            Person person = contactTracingService.getPerson(userId);
 
             if (person != null && person.isCorrectPassword(request.getParameter("password").trim())) {
                 Timestamp newLastLogin = new Timestamp(System.currentTimeMillis());
                 person.setLastLogin(newLastLogin);
                 person.incrementAmountOfTimesLoggedIn();
-                service.update(person);
+                contactTracingService.updatePerson(person);
 
                 HttpSession session = request.getSession();
                 session.setAttribute("user", person);

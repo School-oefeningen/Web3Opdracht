@@ -14,7 +14,7 @@ public class RegisterTestResult extends RequestHandler {
         Checker.isUserLoggedIn(request);
         Person person = Checker.getUserInSession(request);
 
-        TestResult testResult = testResultService.getTestResultFromUser(person.getUserid());
+        TestResult testResult = contactTracingService.getTestResultFromUser(person.getUserid());
         if (testResult != null) request.setAttribute("testResult", testResult);
 
         return "registerTestResult.jsp";

@@ -15,9 +15,9 @@ public class DeleteAccount extends RequestHandler {
         }
 
         String userId = request.getParameter("userId");
-        service.delete(userId);
-        contactService.removeFromUser(userId);
-        testResultService.removeFromUser(userId);
+        contactTracingService.removePerson(userId);
+        contactTracingService.removeContactsFromUser(userId);
+        contactTracingService.removeTestResultFromUser(userId);
         request.setAttribute("succes", "The account and all its content has succesfully been deleted.");
 
         Person person = (Person) request.getSession().getAttribute("user");

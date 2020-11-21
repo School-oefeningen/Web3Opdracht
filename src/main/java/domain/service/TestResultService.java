@@ -12,11 +12,6 @@ public class TestResultService {
 
     public TestResultService() {}
 
-    public boolean isUserPositive(String userId) {
-        if (Checker.isEmptyString(userId)) throw new DomainException("No user id given");
-        return db.isUserPositive(userId);
-    }
-
     public TestResult getTestResultFromUser(String userId) {
         if (Checker.isEmptyString(userId)) throw new DomainException("No user id given");
         return db.getTestResultFromUser(userId);

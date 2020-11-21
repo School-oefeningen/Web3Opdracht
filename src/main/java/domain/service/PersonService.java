@@ -47,7 +47,7 @@ public class PersonService {
         db.update(person);
     }
 
-    public void delete(String personId) {
+    public void remove(String personId) {
         // Exception if personId is null
         if (Checker.isEmptyString(personId)) throw new DbException("No id given");
 

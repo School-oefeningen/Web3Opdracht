@@ -19,11 +19,11 @@ public class ContactsOverview extends RequestHandler {
 
         List<Contact> contacts;
 
-        if (person.getRole() == Role.ADMIN) contacts = contactService.getAll();
-        else contacts = contactService.getAllFromUser(person.getUserid());
+        if (person.getRole() == Role.ADMIN) contacts = contactTracingService.getAllContacts();
+        else contacts = contactTracingService.getAllContactsFromUser(person.getUserid());
         request.setAttribute("contacts", contacts);
 
-        TestResult testResult = testResultService.getTestResultFromUser(person.getUserid());
+        TestResult testResult = contactTracingService.getTestResultFromUser(person.getUserid());
         if (testResult != null) request.setAttribute("testResult", testResult);
 
         return "contactsOverview.jsp";

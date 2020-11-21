@@ -25,7 +25,7 @@ public class Add extends RequestHandler {
 
         if (errors.size() == 0) {
             try {
-                service.add(person);
+                contactTracingService.addPerson(person);
                 return "Controller?command=UsersOverview";
             } catch (DbException e) {
                 errors.add(e.getMessage());

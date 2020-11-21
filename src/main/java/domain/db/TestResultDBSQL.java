@@ -33,22 +33,6 @@ public class TestResultDBSQL implements TestResultDb {
     }
 
     @Override
-    public boolean isUserPositive(String userId) {
-
-        String sql = String.format("SELECT * FROM %s.testresult WHERE userid = ?", schema);
-
-        try {
-            PreparedStatement statementSql = connection.prepareStatement(sql);
-            statementSql.setString(1, userId);
-            ResultSet result = statementSql.executeQuery();
-
-            return result.next();
-        } catch (SQLException e) {
-            throw new DbException(e.getMessage(), e);
-        }
-    }
-
-    @Override
     public List<TestResult> getAll() {
 
         List<TestResult> testResults = new ArrayList<>();
