@@ -22,6 +22,12 @@
                 <br>
             </c:if>
 
+            <form action="Controller?command=ContactsOverview" method="POST">
+                <p><label for="fromDate">From</label><input type="date" id="fromDate" name="fromDate" value="<c:out value="${fromDatePrevious}"/>" required></p>
+                <p><label for="untilDate">Until</label><input type="date" id="untilDate" name="untilDate" value="<c:out value="${untilDatePrevious}"/>" required></p>
+                <p><input type="submit" id="filter" value="Filter"></p>
+            </form>
+
             <c:choose>
                 <c:when test="${contacts.size() <= 0}">
                     <p id="error">No contacts to show.</p>

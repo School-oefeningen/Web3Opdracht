@@ -1,8 +1,10 @@
 package domain.db;
 
 import domain.model.Contact;
+import domain.model.Person;
 import domain.model.TestResult;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ContactDb {
@@ -37,4 +39,8 @@ public interface ContactDb {
     List<Contact> getAllFromUserAfterDate(TestResult testResult);
 
     void removeFromUser(String userId);
+
+    List<Contact> getAllContactsBetweenDates(LocalDate fromDate, LocalDate untilDate);
+
+    List<Contact> getAllContactsFromUserBetweenDates(Person person, LocalDate fromDate, LocalDate untilDate);
 }

@@ -21,7 +21,7 @@ public class AdminSearch extends RequestHandler {
         Map<TestResult, List<Contact>> testResultsContactsMap = new LinkedHashMap<>();
 
         for (TestResult t: contactTracingService.getAllTestResults()) {
-            testResultsContactsMap.put(t, contactTracingService.getAllContactFromUserAfterDate(t));
+            testResultsContactsMap.put(t, contactTracingService.getAllContactsFromUserAfterDate(t));
         }
 
         request.setAttribute("testResultsContactsMap", testResultsContactsMap);

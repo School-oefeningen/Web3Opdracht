@@ -4,6 +4,7 @@ import domain.model.Contact;
 import domain.model.Person;
 import domain.model.TestResult;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ContactTracingService {
@@ -11,9 +12,9 @@ public class ContactTracingService {
     private final ContactService contactService = new ContactService();
     private final TestResultService testResultService = new TestResultService();
 
-    public ContactTracingService() {
-    }
+    public ContactTracingService() {}
 
+    // PersonService
     public Person getPerson(String personId) {
         return personService.get(personId.toLowerCase());
     }
@@ -34,6 +35,7 @@ public class ContactTracingService {
         personService.remove(personId);
     }
 
+    // ContactService
     public List<Contact> getAllContactsFromUser(String userId) {
         return contactService.getAllFromUser(userId);
     }
@@ -46,14 +48,23 @@ public class ContactTracingService {
         contactService.add(contact);
     }
 
-    public List<Contact> getAllContactFromUserAfterDate(TestResult testResult) {
+    public List<Contact> getAllContactsFromUserAfterDate(TestResult testResult) {
         return contactService.getAllFromUserAfterDate(testResult);
+    }
+
+    public List<Contact> getAllContactsBetweenDates(LocalDate fromDate, LocalDate untilDate) {
+        return contactService.getAllContactsBetweenDates(fromDate, untilDate);
+    }
+
+    public List<Contact> getAllContactsFromUserBetweenDates(Person person, LocalDate fromDate, LocalDate untilDate) {
+        return contactService.getAllContactsFromUserBetweenDates(person, fromDate, untilDate);
     }
 
     public void removeContactsFromUser(String userId) {
         contactService.removeFromUser(userId);
     }
 
+    // TestResultService
     public TestResult getTestResultFromUser(String userId) {
         return testResultService.getTestResultFromUser(userId);
     }

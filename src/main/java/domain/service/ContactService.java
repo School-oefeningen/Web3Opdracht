@@ -4,9 +4,11 @@ import domain.db.ContactDBSQL;
 import domain.db.ContactDb;
 import domain.model.Contact;
 import domain.model.DomainException;
+import domain.model.Person;
 import domain.model.TestResult;
 import util.Checker;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ContactService {
@@ -35,6 +37,14 @@ public class ContactService {
     public List<Contact> getAllFromUserAfterDate(TestResult testResult) {
         if (testResult == null) throw new DomainException("No test result given");
         return db.getAllFromUserAfterDate(testResult);
+    }
+
+    public List<Contact> getAllContactsBetweenDates(LocalDate fromDate, LocalDate untilDate) {
+        return db.getAllContactsBetweenDates(fromDate, untilDate);
+    }
+
+    public List<Contact> getAllContactsFromUserBetweenDates(Person person, LocalDate fromDate, LocalDate untilDate) {
+        return db.getAllContactsFromUserBetweenDates(person, fromDate, untilDate);
     }
 
     public void removeFromUser(String userId) {

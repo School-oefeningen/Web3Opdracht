@@ -23,7 +23,7 @@ public class TestResultsSearch extends RequestHandler {
             return "search.jsp";
         }
 
-        List<Contact> contacts = contactTracingService.getAllContactFromUserAfterDate(testResult);
+        List<Contact> contacts = contactTracingService.getAllContactsFromUserAfterDate(testResult);
 
         if (contacts.isEmpty()) request.setAttribute("error", "No contacts to show.");
 

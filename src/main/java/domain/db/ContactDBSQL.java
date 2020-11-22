@@ -1,10 +1,12 @@
 package domain.db;
 
 import domain.model.Contact;
+import domain.model.Person;
 import domain.model.TestResult;
 import util.DbConnectionService;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,6 @@ public class ContactDBSQL implements ContactDb {
 
     @Override
     public void add(Contact contact) {
-
         String sql = String.format("INSERT INTO %s.contact(userid, firstname, lastname, timestamp, phonenumber, email) VALUES (?, ?, ?, ?, ?, ?);", schema);
 
         try {
@@ -84,8 +85,8 @@ public class ContactDBSQL implements ContactDb {
 
     @Override
     public List<Contact> getAllFromUserAfterDate(TestResult testResult) {
-
         List<Contact> contacts = new ArrayList<>();
+
         String sql = String.format("SELECT * FROM %s.contact WHERE userid = ?" +
                 "AND timestamp >= ? " +
                 "ORDER BY lastname, firstname, timestamp", schema);
@@ -110,7 +111,6 @@ public class ContactDBSQL implements ContactDb {
 
     @Override
     public void removeFromUser(String userId) {
-
         String sql = String.format("DELETE FROM %s.contact WHERE userid = ?", schema);
 
         try {
@@ -120,6 +120,58 @@ public class ContactDBSQL implements ContactDb {
         } catch (SQLException e) {
             throw new DbException(e);
         }
+    }
+
+    @Override
+    public List<Contact> getAllContactsBetweenDates(LocalDate fromDate, LocalDate untilDate) {
+        List<Contact> contacts = new ArrayList<>();
+
+        String sql = String.format("SELECT * FROM %s.contact WHERE timestamp::date BETWEEN ? AND ? " +
+                "ORDER BY lastname, firstname, timestamp", schema);
+
+        try {
+            PreparedStatement statementSql = connection.prepareStatement(sql);
+            statementSql.setDate(1, Date.valueOf(fromDate));
+            statementSql.setDate(2, Date.valueOf(untilDate));
+            ResultSet result = statementSql.executeQuery();
+
+            while (result.next()) {
+
+                Contact contact = makeContact(result);
+                contacts.add(contact);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage(), e);
+        }
+
+        return contacts;
+    }
+
+    @Override
+    public List<Contact> getAllContactsFromUserBetweenDates(Person person, LocalDate fromDate, LocalDate untilDate) {
+        List<Contact> contacts = new ArrayList<>();
+
+        String sql = String.format("SELECT * FROM %s.contact WHERE userid = ? " +
+                "AND timestamp::date BETWEEN ? AND ? " +
+                "ORDER BY lastname, firstname, timestamp", schema);
+
+        try {
+            PreparedStatement statementSql = connection.prepareStatement(sql);
+            statementSql.setString(1, person.getUserid());
+            statementSql.setDate(2, Date.valueOf(fromDate));
+            statementSql.setDate(3, Date.valueOf(untilDate));
+            ResultSet result = statementSql.executeQuery();
+
+            while (result.next()) {
+
+                Contact contact = makeContact(result);
+                contacts.add(contact);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage(), e);
+        }
+
+        return contacts;
     }
 
     private Contact makeContact(ResultSet result) throws SQLException {

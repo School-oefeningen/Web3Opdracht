@@ -40,8 +40,8 @@ public class Checker {
         if (person == null) throw new NotAuthorizedException("You are not authorized to see this content!");
 
         boolean allowed = false;
-        for (Role r: roles) {
-            if (person.getRole().equals(r)) {
+        for (Role role: roles) {
+            if (person.getRole().equals(role)) {
                 allowed = true;
                 break;
             }
@@ -53,5 +53,10 @@ public class Checker {
     public static void roleIsAdmin(HttpServletRequest request) {
         Role[] roles =  {Role.ADMIN};
         checkRole(request, roles);
+    }
+
+    public static boolean userIsAdmin(HttpServletRequest request) {
+        Person person = getUserInSession(request);
+        return person.getRole().equals(Role.ADMIN);
     }
 }
