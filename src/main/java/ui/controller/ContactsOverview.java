@@ -24,9 +24,11 @@ public class ContactsOverview extends RequestHandler {
         try {
             String fromString = request.getParameter("fromDate");
             fromDate = LocalDate.parse(fromString);
+            request.setAttribute("fromDatePrevious", fromString);
 
             String untilString = request.getParameter("untilDate");
             untilDate = LocalDate.parse(untilString);
+            request.setAttribute("untilDatePrevious", untilString);
         } catch (Exception ignored) {}
 
         if (fromDate != null && untilDate != null && !fromDate.isAfter(untilDate)) {

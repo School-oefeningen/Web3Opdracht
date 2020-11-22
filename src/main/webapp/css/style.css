@@ -33,6 +33,10 @@ ul {
     list-style-type: none;
 }
 
+a {
+    color: #000;
+}
+
 /**
     Mobile first
  */
@@ -96,6 +100,20 @@ nav ul li a {
 }
 nav ul li a:hover {
     background-color: var(--dark-gray);
+}
+
+#filterForm {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--mobile-padding);
+    margin-bottom: var(--mobile-padding);
+}
+#filterForm p,
+#filterForm label,
+#filterForm input {
+    display: inline;
+    margin: 0 !important;
 }
 
 footer {
