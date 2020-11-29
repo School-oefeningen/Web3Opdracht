@@ -7,6 +7,8 @@
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
+    <script src="scripts/app.js" defer></script>
 </head>
 <body>
 <div id="container">
@@ -17,7 +19,7 @@
 
         <main>
             <c:if test="${not empty errors}">
-                <div class="alert-danger">
+                <div id="alert-danger">
                     <ul>
                         <c:forEach var="error" items="${errors}">
                             <li><c:out value="${error}"/></li>
@@ -27,12 +29,15 @@
             </c:if>
 
             <form method="POST" action="Controller?command=Add" novalidate="novalidate">
-                <!-- novalidate in order to be able to run tests correctly -->
                 <p><label for="userId">User id</label><input type="text" id="userId" name="userId" value="<c:out value="${userIdPrevious}"/>" required></p>
                 <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName" value="<c:out value="${firstNamePrevious}"/>" required></p>
                 <p><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName" value="<c:out value="${lastNamePrevious}"/>" required></p>
                 <p><label for="email">Email</label><input type="email" id="email" name="email" value="<c:out value="${emailPrevious}"/>" required></p>
+
                 <p><label for="password">Password</label><input type="password" id="password" name="password" value="<c:out value="${passwordPrevious}"/>" required></p>
+                <p>Password strength: <span id="password-strength-text">please enter a password</span></p>
+                <meter max="4" id="password-strength-meter"></meter>
+
                 <p><input type="submit" id="signUp" value="Sign Up"></p>
             </form>
         </main>

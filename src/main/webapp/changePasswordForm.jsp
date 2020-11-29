@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Change password</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
+    <script src="scripts/app.js" defer></script>
 </head>
 <body>
 <div id="container">
@@ -17,7 +19,7 @@
 
         <main>
             <c:if test="${not empty error}">
-                <div class="alert-danger">
+                <div id="alert-danger">
                     <ul>
                         <li>${error}</li>
                     </ul>
@@ -25,14 +27,13 @@
             </c:if>
 
             <form method="POST" action="Controller?command=ChangePasswordConfirmation">
-                <p><label for="currentPassword">Current password</label><input type="password" id="currentPassword"
-                                                                                name="currentPassword" required></p>
-                <p><label for="newPassword">New password</label><input type="password" id="newPassword"
-                                                                        name="newPassword" required></p>
-                <p><label for="newPasswordConfirmation">New password confirmation</label><input type="password"
-                                                                                                 id="newPasswordConfirmation"
-                                                                                                 name="newPasswordConfirmation"
-                                                                                                 required></p>
+                <p><label for="currentPassword">Current password</label><input type="password" id="currentPassword" name="currentPassword" required></p>
+
+                <p><label for="newPassword">New password</label><input type="password" id="password" name="newPassword" required></p>
+                <p>Password strength: <span id="password-strength-text">please enter a password</span></p>
+                <meter max="4" id="password-strength-meter"></meter>
+
+                <p><label for="newPasswordConfirmation">New password confirmation</label><input type="password" id="newPasswordConfirmation" name="newPasswordConfirmation" required></p>
                 <p><input type="submit" id="changePassword" value="Change password"></p>
             </form>
         </main>

@@ -93,7 +93,7 @@ public class AdminFunctionalitiesTest {
         ArrayList<WebElement> listItems = (ArrayList<WebElement>) driver.findElements(By.cssSelector("table tr td input"));
 
         for (WebElement listItem : listItems) {
-            if (listItem.getAttribute("id").equals("deleteAccountButton")) return true;
+            if (listItem.getAttribute("id").equals("removeButton")) return true;
         }
         return false;
     }

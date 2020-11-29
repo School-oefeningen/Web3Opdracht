@@ -19,7 +19,7 @@ public class ChangePassword extends RequestHandler {
         contactTracingService.updatePerson(person);
 
         request.getSession().invalidate();
-        request.setAttribute("succes", "Your password has been changed! Please log in again.");
+        request.setAttribute("success", "Your password has been changed! Please log in again.");
         return "Controller?command=Home";
     }
 }

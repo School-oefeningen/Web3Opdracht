@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Register test result</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="scripts/app.js" defer></script>
 </head>
 <body>
 <div id="container">
@@ -18,7 +19,7 @@
 
         <main>
             <c:if test="${not empty errors}">
-                <div class="alert-danger">
+                <div id="alert-danger">
                     <ul>
                         <c:forEach var="error" items="${errors}">
                             <li><c:out value="${error}"/></li>
@@ -32,7 +33,7 @@
                 <br>
             </c:if>
             <form method="POST" action="Controller?command=AddTestResult">
-                <p><label for="date">Date</label><input type="date" id="date" name="date" required></p>
+                <p><label for="date">Date</label><input type="date" id="date" name="date" value="<c:out value="${currentDate}"/>" required></p>
                 <p><input type="submit" id="registerTestResult" value="Register new positive test result"></p>
             </form>
         </main>

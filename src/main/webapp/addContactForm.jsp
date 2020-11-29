@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Change password</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="scripts/app.js" defer></script>
 </head>
 <body>
 <div id="container">
@@ -17,7 +18,7 @@
 
         <main>
             <c:if test="${not empty errors}">
-                <div class="alert-danger">
+                <div id="alert-danger">
                     <ul>
                         <c:forEach var="error" items="${errors}">
                             <li><c:out value="${error}"/></li>

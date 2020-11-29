@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <title>Overview</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="scripts/app.js" defer></script>
 </head>
 <body>
 <div id="container">
@@ -17,9 +18,18 @@
         </jsp:include>
 
         <main>
+            <c:if test="${not empty success}">
+                <div id="alert-success">
+                    <ul>
+                        <li><c:out value="${success}"/></li>
+                    </ul>
+                </div>
+                <br>
+            </c:if>
+
             <c:if test="${not empty testResult}">
                 <p>Your last positive Covid-19 test has been registered on: <fmt:formatDate pattern="dd/MM/yyyy" value="${testResult.date}"/></p>
-                <br>
+                <br><br>
             </c:if>
 
             <form id="filterForm" action="Controller?command=ContactsOverview" method="POST">

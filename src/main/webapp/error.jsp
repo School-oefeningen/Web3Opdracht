@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Error</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="scripts/app.js" defer></script>
 </head>
 <body>
 <div id="container">
@@ -18,11 +19,11 @@
 
         <main>
             <c:if test="${not empty error}">
-                <p class="alert-danger"><c:out value="${error}"/></p>
+                <p id="alert-danger"><c:out value="${error}"/></p>
             </c:if>
 
             <c:if test="${not empty pageContext.exception}">
-                <p class="alert-danger">You caused a <c:out value="${pageContext.exception}"/> on the server!</p>
+                <p id="alert-danger">You caused a <c:out value="${pageContext.exception}"/> on the server!</p>
             </c:if>
         </main>
     </div>

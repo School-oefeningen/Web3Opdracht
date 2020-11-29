@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <title>Overview</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="scripts/app.js" defer></script>
 </head>
 <body>
 <div id="container">
@@ -16,10 +17,10 @@
         </jsp:include>
 
         <main>
-            <c:if test="${not empty succes}">
-                <div class="alert-succes">
+            <c:if test="${not empty success}">
+                <div id="alert-success">
                     <ul>
-                        <li><c:out value="${succes}"/></li>
+                        <li><c:out value="${success}"/></li>
                     </ul>
                 </div>
             </c:if>
@@ -46,7 +47,7 @@
                                 <c:if test="${user.userid eq 'admin'}">
                                     <td>
                                         <form method="POST" action="Controller?command=DeleteAccountConfirmation&userId=<c:out value="${person.userid}"/>">
-                                            <input type="image" id="deleteAccountButton" src="images/delete-button.svg" alt="Delete user submit">
+                                            <input type="image" id="removeButton" src="images/delete-button.svg" alt="Delete user submit">
                                         </form>
                                     </td>
                                 </c:if>
@@ -57,7 +58,7 @@
                 </c:otherwise>
             </c:choose>
 
-            <c:if test="${user.userid ne 'admin'}">
+            <c:if test="${empty user}">
                 <form method="POST" action="Controller?command=Register">
                     <p><input type="submit" id="register" value="Register new user"></p>
                 </form>

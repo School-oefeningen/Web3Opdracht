@@ -14,6 +14,7 @@ public class TestResultsSearch extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         Checker.isUserLoggedIn(request);
+        Checker.roleIsNotAdmin(request);
         Person person = Checker.getUserInSession(request);
 
         TestResult testResult = contactTracingService.getTestResultFromUser(person.getUserid());
@@ -24,8 +25,6 @@ public class TestResultsSearch extends RequestHandler {
         }
 
         List<Contact> contacts = contactTracingService.getAllContactsFromUserAfterDate(testResult);
-
-        if (contacts.isEmpty()) request.setAttribute("error", "No contacts to show.");
 
         request.setAttribute("testResult", testResult);
         request.setAttribute("contacts", contacts);

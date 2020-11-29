@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <title>Search</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="scripts/app.js" defer></script>
 </head>
 <body>
 <div id="container">
@@ -19,33 +20,49 @@
         <main>
             <c:choose>
                 <c:when test="${not empty error}">
-                    <p id="error"><c:out value="${error}"/></p>
+                    <p><c:out value="${error}"/></p>
                 </c:when>
                 <c:otherwise>
+                    <c:if test="${not empty success}">
+                        <div id="alert-success">
+                            <ul>
+                                <li><c:out value="${success}"/></li>
+                            </ul>
+                        </div>
+                        <br>
+                    </c:if>
+
                     <c:if test="${not empty testResult}">
                         <p>Your last positive Covid-19 test has been registered on: <fmt:formatDate pattern="dd/MM/yyyy" value="${testResult.date}"/></p>
                         <br>
                     </c:if>
 
-                    <table>
-                        <tr>
-                            <th>First name</th>
-                            <th>Last name</th>
-                            <th>Date</th>
-                            <th>Phone number</th>
-                            <th>Email</th>
-                        </tr>
-                        <c:forEach var="contact" items="${contacts}">
-                            <tr>
-                                <td><c:out value="${contact.firstName}"/></td>
-                                <td><c:out value="${contact.lastName}"/></td>
-                                <td><fmt:formatDate pattern="dd/MM/yyyy" value="${contact.timestamp}"/></td>
-                                <td><c:out value="${contact.phoneNumber}"/></td>
-                                <td><c:out value="${contact.email}"/></td>
-                            </tr>
-                        </c:forEach>
-                        <caption>Contacts Overview</caption>
-                    </table>
+                    <c:choose>
+                        <c:when test="${not empty contacts}">
+                            <table>
+                                <tr>
+                                    <th>First name</th>
+                                    <th>Last name</th>
+                                    <th>Date</th>
+                                    <th>Phone number</th>
+                                    <th>Email</th>
+                                </tr>
+                                <c:forEach var="contact" items="${contacts}">
+                                    <tr>
+                                        <td><c:out value="${contact.firstName}"/></td>
+                                        <td><c:out value="${contact.lastName}"/></td>
+                                        <td><fmt:formatDate pattern="dd/MM/yyyy" value="${contact.timestamp}"/></td>
+                                        <td><c:out value="${contact.phoneNumber}"/></td>
+                                        <td><c:out value="${contact.email}"/></td>
+                                    </tr>
+                                </c:forEach>
+                                <caption>Contacts Overview</caption>
+                            </table>
+                        </c:when>
+                        <c:otherwise>
+                            <p>No contacts to show.</p>
+                        </c:otherwise>
+                    </c:choose>
                 </c:otherwise>
             </c:choose>
         </main>

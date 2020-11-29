@@ -3,6 +3,7 @@ package ui.controller;
 import domain.db.DbException;
 import domain.model.Person;
 import domain.model.Role;
+import util.Checker;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +27,11 @@ public class Add extends RequestHandler {
         if (errors.size() == 0) {
             try {
                 contactTracingService.addPerson(person);
-                return "Controller?command=Home";
+
+                Checker.loginUser(request, person, contactTracingService);
+
+                request.setAttribute("success", "Your account has been registered successfully.");
+                return "Controller?command=ContactsOverview";
             } catch (DbException e) {
                 errors.add(e.getMessage());
             }

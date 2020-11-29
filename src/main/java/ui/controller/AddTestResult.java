@@ -3,6 +3,7 @@ package ui.controller;
 import domain.db.DbException;
 import domain.model.Person;
 import domain.model.TestResult;
+import util.Checker;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ public class AddTestResult extends RequestHandler {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+        Checker.roleIsNotAdmin(request);
         List<String> errors = new ArrayList<>();
 
         TestResult testResult = new TestResult();
@@ -24,6 +26,8 @@ public class AddTestResult extends RequestHandler {
         if (errors.size() == 0) {
             try {
                 contactTracingService.addTestResult(testResult);
+                request.setAttribute("testResult", testResult);
+                request.setAttribute("success", "Your positive test result has been registered successfully.");
                 return "Controller?command=TestResultsSearch";
             } catch (DbException e) {
                 errors.add(e.getMessage());
