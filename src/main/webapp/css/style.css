@@ -104,7 +104,7 @@ nav ul li a:hover {
 
 #filterForm {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     flex-wrap: wrap;
     gap: var(--mobile-padding);
     margin-bottom: var(--mobile-padding);
