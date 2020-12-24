@@ -36,6 +36,7 @@ public class Add extends RequestHandler {
                 errors.add(e.getMessage());
             }
         }
+
         request.setAttribute("errors", errors);
         return "Controller?command=Register";
     }

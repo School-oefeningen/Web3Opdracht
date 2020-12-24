@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Change password</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
     <script src="scripts/app.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
+    <script src="scripts/passwordStrengthMeter.js" defer></script>
 </head>
 <body>
 <div id="container">

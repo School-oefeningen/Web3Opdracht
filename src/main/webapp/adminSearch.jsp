@@ -20,9 +20,22 @@
         <main class="main">
             <c:choose>
                 <c:when test="${empty testResultsContactsMap.size()}">
-                    <p id="error">No postive test results to show.</p>
+                    <p id="error">No positive test results to show.</p>
                 </c:when>
                 <c:otherwise>
+                    <c:if test="${not empty error}">
+                        <div id="alert-danger">
+                            <ul>
+                                <li><c:out value="${error}"/></li>
+                            </ul>
+                        </div>
+                    </c:if>
+                    <form id="filterForm" action="Controller?command=AdminSearch" method="POST">
+                        <p><label for="userId">User id </label><input type="text" id="userId" name="userId" required></p>
+                        <p><input type="submit" id="filter" value="Filter"></p>
+                        <a href="Controller?command=AdminSearch">Clear filter</a>
+                    </form>
+                    <br>
 
                     <c:forEach var="el" items="${testResultsContactsMap}">
                         <p>The user <c:out value="${el.key.userId}"/> has been tested positive on: <fmt:formatDate pattern="dd/MM/yyyy" value="${el.key.date}"/></p>
@@ -45,7 +58,7 @@
                                     </tr>
                                     <c:forEach var="contact" items="${el.value}">
                                         <tr>
-                                            <td id="userId"><c:out value="${contact.userId}"/></td>
+                                            <td class="userId"><c:out value="${contact.userId}"/></td>
                                             <td><c:out value="${contact.firstName}"/></td>
                                             <td><c:out value="${contact.lastName}"/></td>
                                             <td><fmt:formatDate pattern="dd/MM/yyyy" value="${contact.timestamp}"/></td>

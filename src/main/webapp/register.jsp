@@ -7,8 +7,9 @@
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
     <script src="scripts/app.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
+    <script src="scripts/passwordStrengthMeter.js" defer></script>
 </head>
 <body>
 <div id="container">

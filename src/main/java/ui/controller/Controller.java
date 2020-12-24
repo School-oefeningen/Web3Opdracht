@@ -26,6 +26,7 @@ public class Controller extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("command");
         String destination = "index.jsp";
+
         if (command != null) {
             try {
                 RequestHandler handler = handlerFactory.getHandler(command, contactTracingService);
@@ -35,6 +36,9 @@ public class Controller extends HttpServlet {
                 destination = "error.jsp";
             }
         }
-        request.getRequestDispatcher(destination).forward(request, response);
+
+        if (!response.isCommitted())  {
+            request.getRequestDispatcher(destination).forward(request, response);
+        }
     }
 }
