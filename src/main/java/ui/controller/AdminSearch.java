@@ -1,7 +1,10 @@
 package ui.controller;
 
 import domain.db.DbException;
-import domain.model.*;
+import domain.model.Contact;
+import domain.model.DomainException;
+import domain.model.NotAuthorizedException;
+import domain.model.TestResult;
 import util.Checker;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +25,7 @@ public class AdminSearch extends RequestHandler {
 
         if (!Checker.isEmptyString(userId)) {
             try {
-                Person person = contactTracingService.getPersonService().get(userId);
-                TestResult testResult = contactTracingService.getTestResultService().getTestResultFromUser(userId);
+                TestResult testResult = contactTracingService.getTestResultService().getTestResultFromUser(userId.trim());
                 testResultsContactsMap.put(testResult, contactTracingService.getContactService().getAllFromUserAfterDate(testResult));
                 request.setAttribute("testResultsContactsMap", testResultsContactsMap);
                 return "adminSearch.jsp";

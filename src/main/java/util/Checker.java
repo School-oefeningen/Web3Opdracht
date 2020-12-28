@@ -84,7 +84,7 @@ public class Checker {
         person.setLastLogin(newLastLogin);
         person.incrementAmountOfTimesLoggedIn();
 
-        contactTracingService.updatePerson(person);
+        contactTracingService.getPersonService().update(person);
 
         request.getSession().setAttribute("user", person);
     }
