@@ -33,21 +33,21 @@ public class ContactsOverview extends RequestHandler {
 
         if (fromDate != null && untilDate != null && !fromDate.isAfter(untilDate)) {
             if (person.getRole() == Role.ADMIN) {
-                contacts = contactTracingService.getAllContactsBetweenDates(fromDate, untilDate);
+                contacts = contactTracingService.getContactService().getAllContactsBetweenDates(fromDate, untilDate);
             } else {
-                contacts = contactTracingService.getAllContactsFromUserBetweenDates(person, fromDate, untilDate);
+                contacts = contactTracingService.getContactService().getAllContactsFromUserBetweenDates(person, fromDate, untilDate);
             }
         } else {
             if (person.getRole() == Role.ADMIN) {
-                contacts = contactTracingService.getAllContacts();
+                contacts = contactTracingService.getContactService().getAll();
             }
             else {
-                contacts = contactTracingService.getAllContactsFromUser(person.getUserid());
+                contacts = contactTracingService.getContactService().getAllFromUser(person.getUserid());
             }
         }
         request.setAttribute("contacts", contacts);
 
-        TestResult testResult = contactTracingService.getTestResultFromUser(person.getUserid());
+        TestResult testResult = contactTracingService.getTestResultService().getTestResultFromUser(person.getUserid());
         if (testResult != null) {
             request.setAttribute("testResult", testResult);
         }

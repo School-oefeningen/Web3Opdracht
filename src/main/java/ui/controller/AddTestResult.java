@@ -25,7 +25,7 @@ public class AddTestResult extends RequestHandler {
 
         if (errors.size() == 0) {
             try {
-                contactTracingService.addTestResult(testResult);
+                contactTracingService.getTestResultService().add(testResult);
                 request.setAttribute("testResult", testResult);
                 request.setAttribute("success", "Your positive test result has been registered successfully.");
                 return "Controller?command=TestResultsSearch";

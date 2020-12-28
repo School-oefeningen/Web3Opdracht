@@ -31,7 +31,7 @@ public class AddContact extends RequestHandler {
 
         if (errors.size() == 0) {
             try {
-                contactTracingService.addContact(contact);
+                contactTracingService.getContactService().add(contact);
                 request.setAttribute("success", "Your contact has been registered successfully.");
                 return "Controller?command=ContactsOverview";
             } catch (DbException e) {

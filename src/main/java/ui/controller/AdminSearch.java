@@ -22,9 +22,9 @@ public class AdminSearch extends RequestHandler {
 
         if (!Checker.isEmptyString(userId)) {
             try {
-                Person person = contactTracingService.getPerson(userId);
-                TestResult testResult = contactTracingService.getTestResultFromUser(userId);
-                testResultsContactsMap.put(testResult, contactTracingService.getAllContactsFromUserAfterDate(testResult));
+                Person person = contactTracingService.getPersonService().get(userId);
+                TestResult testResult = contactTracingService.getTestResultService().getTestResultFromUser(userId);
+                testResultsContactsMap.put(testResult, contactTracingService.getContactService().getAllFromUserAfterDate(testResult));
                 request.setAttribute("testResultsContactsMap", testResultsContactsMap);
                 return "adminSearch.jsp";
             } catch (DbException e) {
@@ -34,8 +34,8 @@ public class AdminSearch extends RequestHandler {
             }
         }
 
-        for (TestResult t: contactTracingService.getAllTestResults()) {
-            testResultsContactsMap.put(t, contactTracingService.getAllContactsFromUserAfterDate(t));
+        for (TestResult t: contactTracingService.getTestResultService().getAll()) {
+            testResultsContactsMap.put(t, contactTracingService.getContactService().getAllFromUserAfterDate(t));
         }
 
         request.setAttribute("testResultsContactsMap", testResultsContactsMap);

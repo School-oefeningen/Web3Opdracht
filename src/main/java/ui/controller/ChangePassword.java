@@ -16,7 +16,7 @@ public class ChangePassword extends RequestHandler {
 
         person.setPasswordHashed(newPassword);
 
-        contactTracingService.updatePerson(person);
+        contactTracingService.getPersonService().update(person);
 
         request.getSession().invalidate();
         request.setAttribute("success", "Your password has been changed! Please log in again.");

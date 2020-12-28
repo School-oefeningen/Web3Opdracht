@@ -16,7 +16,7 @@ public class RegisterTestResult extends RequestHandler {
         Checker.roleIsNotAdmin(request);
         Person person = Checker.getUserInSession(request);
 
-        TestResult testResult = contactTracingService.getTestResultFromUser(person.getUserid());
+        TestResult testResult = contactTracingService.getTestResultService().getTestResultFromUser(person.getUserid());
         if (testResult != null) request.setAttribute("testResult", testResult);
 
         request.setAttribute("currentDate", LocalDate.now());

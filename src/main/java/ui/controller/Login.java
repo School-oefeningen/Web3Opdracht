@@ -15,7 +15,7 @@ public class Login extends RequestHandler {
 
         try {
             String userId = request.getParameter("userId").trim();
-            Person person = contactTracingService.getPerson(userId);
+            Person person = contactTracingService.getPersonService().get(userId);
 
             if (person != null && person.isCorrectPassword(request.getParameter("password").trim())) {
                 Checker.loginUser(request, person, contactTracingService);

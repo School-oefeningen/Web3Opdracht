@@ -26,7 +26,7 @@ public class Add extends RequestHandler {
 
         if (errors.size() == 0) {
             try {
-                contactTracingService.addPerson(person);
+                contactTracingService.getPersonService().add(person);
 
                 Checker.loginUser(request, person, contactTracingService);
 
