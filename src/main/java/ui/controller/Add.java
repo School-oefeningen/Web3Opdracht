@@ -7,6 +7,7 @@ import util.Checker;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,14 +32,15 @@ public class Add extends RequestHandler {
                 Checker.loginUser(request, person, contactTracingService);
 
                 request.setAttribute("success", "Your account has been registered successfully.");
+                response.sendRedirect("Controller?command=ContactsOverview");
                 return "Controller?command=ContactsOverview";
-            } catch (DbException e) {
+            } catch (DbException | IOException e) {
                 errors.add(e.getMessage());
             }
         }
 
         request.setAttribute("errors", errors);
-        return "Controller?command=Register";
+        return "register.jsp";
     }
 
     private void setPersonUserid(Person person, HttpServletRequest request, List<String> errors) {

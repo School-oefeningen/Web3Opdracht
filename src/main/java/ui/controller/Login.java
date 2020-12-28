@@ -6,6 +6,7 @@ import util.Checker;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class Login extends RequestHandler {
 
@@ -20,13 +21,14 @@ public class Login extends RequestHandler {
             if (person != null && person.isCorrectPassword(request.getParameter("password").trim())) {
                 Checker.loginUser(request, person, contactTracingService);
                 request.setAttribute("success", "You have been logged in successfully.");
+                response.sendRedirect("Controller?command=Home");
             } else {
                 System.out.println("Log: someone tried to log in but entered a wrong password.");
 
                 request.setAttribute("error", "Wrong password");
                 request.setAttribute("userIdPrevious", userId);
             }
-        } catch (DbException e) {
+        } catch (DbException | IOException e) {
             System.out.println("Log: someone tried to log in but entered a wrong user id.");
             request.setAttribute("error", e.getMessage());
         }

@@ -7,6 +7,7 @@ import domain.model.Person;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -33,8 +34,9 @@ public class AddContact extends RequestHandler {
             try {
                 contactTracingService.getContactService().add(contact);
                 request.setAttribute("success", "Your contact has been registered successfully.");
+                response.sendRedirect("Controller?command=ContactsOverview");
                 return "Controller?command=ContactsOverview";
-            } catch (DbException e) {
+            } catch (DbException | IOException e) {
                 errors.add(e.getMessage());
             }
         }
