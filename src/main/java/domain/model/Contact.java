@@ -35,7 +35,7 @@ public class Contact {
     }
 
     public void setFirstName(String firstName) {
-        if (Checker.isEmptyString(firstName)) throw new DomainException("No firstname given");
+        if (Checker.isEmptyString(firstName)) throw new DomainException("No first name given");
         this.firstName = firstName;
     }
 
@@ -70,8 +70,8 @@ public class Contact {
     }
 
     public void setTimestamp(Timestamp timestamp) {
-        if (timestamp == null) throw new DomainException("Date can't be null");
-        if (timestamp.after(Date.valueOf(LocalDate.now()))) throw new DomainException("Date can't be after today");
+        if (timestamp == null) throw new DomainException("No date or hour given");
+        if (!timestamp.before(Date.valueOf(LocalDate.now()))) throw new DomainException("Date can't be after today");
         this.timestamp = timestamp;
     }
 }

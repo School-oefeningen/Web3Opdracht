@@ -19,7 +19,7 @@ public class AdminSearchTest {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\loren\\Google Drive\\Hoge school (UCLL)\\Server stuff\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Lorenzo\\Google Drive\\Hoge school (UCLL)\\Server stuff\\chromedriver87.exe");
         driver = new ChromeDriver();
         driver.get(path + "?command=Home");
     }
@@ -33,7 +33,7 @@ public class AdminSearchTest {
     public void userNotLoggedInNavigatesToAdminSearchThrowsError() {
         driver.get(path + "?command=AdminSearch");
         assertEquals("Error", driver.getTitle());
-        assertEquals("Please log in to see this content.", driver.findElement(By.className("alert-danger")).getText());
+        assertEquals("Please log in to see this content.", driver.findElement(By.id("alert-danger")).getText());
     }
 
     @Test
@@ -41,7 +41,7 @@ public class AdminSearchTest {
         loginAsUser();
         driver.get(path + "?command=AdminSearch");
         assertEquals("Error", driver.getTitle());
-        assertEquals("You are not authorized to see this content!", driver.findElement(By.className("alert-danger")).getText());
+        assertEquals("You are not authorized to see this content!", driver.findElement(By.id("alert-danger")).getText());
     }
 
     @Test

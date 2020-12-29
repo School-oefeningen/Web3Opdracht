@@ -35,7 +35,7 @@
 
             <c:choose>
                 <c:when test="${not empty user}">
-                    <p>Welcome, <c:out value="${user.firstName}"/>!</p>
+                    <p>Welcome, <c:out value="${user.userid}"/>!</p>
                     <br>
                     <form action="Controller?command=Logout" method="POST">
                         <p><input type="submit" id="logout" value="Log out"></p>

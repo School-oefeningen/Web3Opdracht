@@ -23,7 +23,7 @@ public class AdminFunctionalitiesTest {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\loren\\Google Drive\\Hoge school (UCLL)\\Server stuff\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Lorenzo\\Google Drive\\Hoge school (UCLL)\\Server stuff\\chromedriver87.exe");
         driver = new ChromeDriver();
         driver.get(path + "?command=Home");
     }
@@ -73,7 +73,7 @@ public class AdminFunctionalitiesTest {
     public void userNotLoggedInDoesNotSeeContactsGivesErrorMessage() {
         assertEquals("Home", driver.getTitle());
         driver.get(path + "?command=ContactsOverview");
-        assertEquals("Please log in to see this content.", driver.findElement(By.className("alert-danger")).getText());
+        assertEquals("Please log in to see this content.", driver.findElement(By.id("alert-danger")).getText());
     }
 
     private boolean isThereContactsFromDifferentUsers() {

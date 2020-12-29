@@ -131,7 +131,7 @@ public class Person {
     }
 
     public void setFirstName(String firstName) {
-        if (Checker.isEmptyString(firstName)) throw new DomainException("No firstname given");
+        if (Checker.isEmptyString(firstName)) throw new DomainException("No first name given");
         this.firstName = firstName;
     }
 
