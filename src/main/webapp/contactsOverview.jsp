@@ -9,6 +9,7 @@
     <title>Contacts overview</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="scripts/app.js" defer></script>
+    <script src="scripts/formValidation.js" defer></script>
 </head>
 <body>
 <div id="container">
@@ -38,7 +39,7 @@
                     <br>
                 </c:when>
                 <c:otherwise>
-                    <form id="filterForm" action="Controller?command=ContactsOverview" method="POST">
+                    <form id="filterForm" action="Controller?command=ContactsOverview" method="POST" novalidate>
                         <p><label for="fromDate">From </label><input type="date" id="fromDate" name="fromDate" value="<c:out value="${fromDatePrevious}"/>" required></p>
                         <p><label for="untilDate">Until </label><input type="date" id="untilDate" name="untilDate" value="<c:out value="${untilDatePrevious}"/>" required></p>
                         <p><input type="submit" id="filter" value="Filter"></p>

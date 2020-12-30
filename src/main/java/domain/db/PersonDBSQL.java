@@ -15,7 +15,6 @@ public class PersonDBSQL implements PersonDB {
     public PersonDBSQL() {
         connection = DbConnectionService.getDbConnection();
         schema = DbConnectionService.getSchema();
-        System.out.println("Schema: " + schema);
     }
 
     @Override

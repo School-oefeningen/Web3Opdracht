@@ -93,7 +93,6 @@ public class AddContactPage extends Page {
     }
 
     public boolean hasStickyDate (String date) {
-        System.out.println(dateField.getAttribute("value"));
         return date.equals(dateField.getAttribute("value"));
     }
 

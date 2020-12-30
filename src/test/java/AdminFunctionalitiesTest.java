@@ -84,8 +84,6 @@ public class AdminFunctionalitiesTest {
             userIds.add(contactUserId.getText());
         }
 
-        System.out.println(userIds.size());
-        System.out.println(userIds.size() != 1);
         return userIds.size() > 1;
     }
 

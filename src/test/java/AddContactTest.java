@@ -3,10 +3,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 import pages.AddContactPage;
 import pages.ContactOverviewPage;
 import pages.HomePage;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -22,7 +26,11 @@ public class AddContactTest {
     @Before
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Lorenzo\\Google Drive\\Hoge school (UCLL)\\Server stuff\\chromedriver87.exe");
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        Map<String, Object> prefs = new HashMap<String, Object>();
+        prefs.put("profile.managed_default_content_settings.javascript", 2);
+        options.setExperimentalOption("prefs", prefs);
+        driver = new ChromeDriver(options);
     }
 
     @After

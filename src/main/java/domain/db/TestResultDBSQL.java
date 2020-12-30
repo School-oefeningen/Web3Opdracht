@@ -14,7 +14,6 @@ public class TestResultDBSQL implements TestResultDb {
     public TestResultDBSQL() {
         connection = DbConnectionService.getDbConnection();
         schema = DbConnectionService.getSchema();
-        System.out.println("Schema: " + schema);
     }
 
     @Override

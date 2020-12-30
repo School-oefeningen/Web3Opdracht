@@ -9,6 +9,7 @@
     <title>Admin search</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="scripts/app.js" defer></script>
+    <script src="scripts/formValidation.js" defer></script>
 </head>
 <body>
 <div id="container">
@@ -30,7 +31,7 @@
                             </ul>
                         </div>
                     </c:if>
-                    <form id="filterForm" action="Controller?command=AdminSearch" method="POST">
+                    <form id="filterForm" action="Controller?command=AdminSearch" method="POST" novalidate>
                         <p><label for="userId">User id </label><input type="text" id="userId" name="userId" required></p>
                         <p><input type="submit" id="filter" value="Filter"></p>
                         <a href="Controller?command=AdminSearch">Clear filter</a>

@@ -21,7 +21,6 @@ public class ContactOverviewPage extends Page {
         ArrayList<WebElement> listItems=(ArrayList<WebElement>) this.driver.findElements(By.cssSelector("td"));
         boolean found = false;
         for (WebElement listItem: listItems) {
-            System.out.println(listItem.getText());
             if (listItem.getText().contains(fullName)) {
                 found = true;
             }

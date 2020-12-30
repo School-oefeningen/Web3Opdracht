@@ -37,6 +37,29 @@ a {
     color: #000;
 }
 
+table {display: block;
+    max-width: fit-content;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+form > div {
+    margin-bottom: 8px;
+    display: flex;
+}
+
+form span.error {
+    margin-bottom: 20px;
+    margin-left: 16px;
+    align-self: flex-end;
+    font-size: 0.9em;
+    color: #b94a48;
+}
+
+form > span.error {
+    margin-bottom: 0;
+}
+
 /**
     Mobile first
  */
@@ -166,6 +189,9 @@ footer {
     Form
  */
 th, td {
+    text-align: left;
+}
+th:not(:last-of-type), td:not(:last-of-type) {
     padding: 0.6em 3.6em 0 0;
     text-align: left;
     vertical-align: top;

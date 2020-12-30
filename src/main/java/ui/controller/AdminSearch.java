@@ -32,7 +32,7 @@ public class AdminSearch extends RequestHandler {
             } catch (DbException e) {
                 request.setAttribute("error", e.getMessage());
             } catch (DomainException e) {
-                request.setAttribute("error", "Person not tested positive");
+                request.setAttribute("error", "Person not tested positive or not in database");
             }
         }
 

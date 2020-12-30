@@ -17,7 +17,6 @@ public class ContactDBSQL implements ContactDb {
     public ContactDBSQL() {
         connection = DbConnectionService.getDbConnection();
         schema = DbConnectionService.getSchema();
-        System.out.println("Schema: " + schema);
     }
 
     @Override

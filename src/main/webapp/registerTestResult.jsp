@@ -9,6 +9,7 @@
     <title>Register test result</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="scripts/app.js" defer></script>
+    <script src="scripts/formValidation.js" defer></script>
 </head>
 <body>
 <div id="container">
@@ -33,7 +34,7 @@
                 <br>
             </c:if>
             <form method="POST" action="Controller?command=AddTestResult">
-                <p><label for="date">Date</label><input type="date" id="date" name="date" value="<c:out value="${currentDate}"/>" required></p>
+                <div><p><label for="date">Date</label><input type="date" id="date" name="date" value="<c:out value="${currentDate}"/>" required></p></div>
                 <p><input type="submit" id="registerTestResult" value="Register new positive test result"></p>
             </form>
         </main>
