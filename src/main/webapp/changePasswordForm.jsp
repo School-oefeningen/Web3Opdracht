@@ -31,7 +31,7 @@
             <form method="POST" action="Controller?command=ChangePasswordConfirmation" novalidate>
                 <div><p><label for="currentPassword">Current password</label><input type="password" id="currentPassword" name="currentPassword" required></p></div>
 
-                <div><p><label for="newPassword">New password</label><input type="password" id="newPassword" name="newPassword" required></p></div>
+                <div><p><label for="password">New password</label><input type="password" id="password" name="password" required></p></div>
                 <p>Password strength: <span id="password-strength-text">please enter a password</span></p>
                 <meter max="4" id="password-strength-meter"></meter>
 

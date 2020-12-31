@@ -11,7 +11,7 @@ public class ChangePasswordConfirmation extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         String currentPassword = request.getParameter("currentPassword");
-        String newPassword = request.getParameter("newPassword");
+        String password = request.getParameter("password");
         String newPasswordConfirmation = request.getParameter("newPasswordConfirmation");
 
         Person p = (Person) request.getSession().getAttribute("user");
@@ -19,11 +19,11 @@ public class ChangePasswordConfirmation extends RequestHandler {
         try {
             // Checks
             isCorrectPassword(p, currentPassword);
-            newPasswordAndConfirmationMatch(newPassword, newPasswordConfirmation);
-            currentPasswordAndNewPasswordDontMatch(currentPassword, newPassword);
+            newPasswordAndConfirmationMatch(password, newPasswordConfirmation);
+            currentPasswordAndNewPasswordDontMatch(currentPassword, password);
 
             // If all checks passed
-            request.setAttribute("newPassword", newPassword);
+            request.setAttribute("newPassword", password);
             return "changePasswordConfirmation.jsp";
         } catch (DomainException e) {
             request.setAttribute("error", e.getMessage());
